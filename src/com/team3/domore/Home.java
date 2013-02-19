@@ -9,6 +9,7 @@ public class Home extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// onCreate
+		// Blah
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 	}
@@ -19,5 +20,4 @@ public class Home extends Activity {
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
 	}
-
 }

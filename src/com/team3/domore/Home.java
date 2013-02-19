@@ -10,6 +10,7 @@ public class Home extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// onCreate
 		// Blah
+		//Third Comment
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 	}

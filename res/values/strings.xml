@@ -4,5 +4,8 @@
     <string name="app_name">DoMore</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="title_activity_alarm">Alarm</string>
+    <string name="title_activity_nearby">Nearby</string>
+    <string name="title_activity_search">Search</string>
 
 </resources>

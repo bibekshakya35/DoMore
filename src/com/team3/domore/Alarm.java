@@ -22,7 +22,7 @@ public class Alarm extends Activity {
 		adapter = new DoMoreAdapter(this, data);
 		list.setAdapter(adapter);
 
-		Database db = new Database(this, "ALARMS.sqlite", "ALARMS");
+		Database db = new Database(this, "ALARMS.sqlite", "ALARM_TABLE");
 		db.createDatabase();
 		db.open();
 		Cursor cursor = db.getData();

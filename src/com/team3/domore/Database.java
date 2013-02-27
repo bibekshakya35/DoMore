@@ -87,12 +87,8 @@ public class Database {
 
 		private myDBHelper(Context context, String name, CursorFactory factory,
 				int version) {
-			super(context, name, factory, version);
-			/*
-			 * this.DB_PATH = "/data/data/" + context.getPackageName() +
-			 * "/databases/";
-			 */
-			this.DB_PATH = context.getFilesDir().getPath() + "/databases/";
+			super(context, name, factory, version); 
+			this.DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
 			this.context = context;
 		}
 

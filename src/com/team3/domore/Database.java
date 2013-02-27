@@ -87,8 +87,9 @@ public class Database {
 
 		private myDBHelper(Context context, String name, CursorFactory factory,
 				int version) {
-			super(context, name, factory, version); 
-			this.DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+			super(context, name, factory, version);
+			this.DB_PATH = "/data/data/" + context.getPackageName()
+					+ "/databases/";
 			this.context = context;
 		}
 
@@ -127,7 +128,7 @@ public class Database {
 			String mPath = this.DB_PATH + databaseName;
 
 			this.mDataBase = SQLiteDatabase.openDatabase(mPath, null,
-					SQLiteDatabase.CREATE_IF_NECESSARY);
+					SQLiteDatabase.OPEN_READWRITE);
 			return this.mDataBase != null;
 		}
 

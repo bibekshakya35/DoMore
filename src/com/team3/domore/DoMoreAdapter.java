@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -45,13 +47,30 @@ public class DoMoreAdapter extends BaseAdapter {
 		TextView day = (TextView) vi.findViewById(R.id.day);
 		ToggleButton onOff = (ToggleButton) vi.findViewById(R.id.on_off);
 
-		HashMap<String, String> alarm = data.get(position);
+		final HashMap<String, String> alarm = data.get(position);
 
 		time.setText(alarm.get("time"));
 		day.setText(alarm.get("day"));
 		if (alarm.get("state").equals("On")) {
 			onOff.setChecked(true);
 		}
+
+		onOff.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				Alarm alarmActivity = (Alarm) DoMoreAdapter.this.activity;
+				if (isChecked) {
+					buttonView.setChecked(false);
+					alarmActivity.db.update(alarm.get("time"),
+							alarm.get("day"), "Off");
+				} else {
+					buttonView.setChecked(true);
+					alarmActivity.db.update(alarm.get("time"),
+							alarm.get("day"), "On");
+				}
+			}
+		});
 
 		return vi;
 	}

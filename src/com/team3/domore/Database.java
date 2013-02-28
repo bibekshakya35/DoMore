@@ -63,6 +63,13 @@ public class Database {
 		}
 	}
 
+	public Cursor update(String time, String day, String newState) {
+		String sql = "UPDATE " + tableName + " SET state = " + newState
+				+ " WHERE time = " + time + " AND day = " + day;
+		Cursor cursor = this.db.rawQuery(sql, null);
+		return cursor;
+	}
+
 	public Cursor search(String key) {
 		try {
 			String sql = "SELECT * FROM " + tableName + " WHERE _id LIKE '%"

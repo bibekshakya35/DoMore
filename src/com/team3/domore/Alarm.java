@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.widget.ListView;
 
 public class Alarm extends Activity {
+	public Database db;
 	private ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 	private DoMoreAdapter adapter;
 
@@ -22,7 +23,7 @@ public class Alarm extends Activity {
 		adapter = new DoMoreAdapter(this, data);
 		list.setAdapter(adapter);
 
-		Database db = new Database(this, "ALARMS.sqlite", "ALARM_TABLE");
+		db = new Database(this, "ALARMS.sqlite", "ALARM_TABLE");
 		db.createDatabase();
 		db.open();
 		Cursor cursor = db.getData();
@@ -46,5 +47,4 @@ public class Alarm extends Activity {
 		getMenuInflater().inflate(R.menu.alarm, menu);
 		return true;
 	}
-
 }

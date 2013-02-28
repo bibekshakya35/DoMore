@@ -34,6 +34,10 @@
             android:name="com.team3.domore.Search"
             android:label="@string/title_activity_search" >
         </activity>
+        <activity
+            android:name="com.team3.domore.AddAlarm"
+            android:label="@string/title_activity_add_alarm" >
+        </activity>
     </application>
 
 </manifest>

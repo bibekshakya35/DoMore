@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import android.widget.ToggleButton;
 
 public class DoMoreAdapter extends BaseAdapter {
 	private Activity activity;
-	private ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+	private ArrayList<HashMap<String, String>> data;
 	private static LayoutInflater inflater = null;
 
 	public DoMoreAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
@@ -37,7 +38,7 @@ public class DoMoreAdapter extends BaseAdapter {
 		return position;
 	}
 
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 		if (convertView == null) {
 			vi = inflater.inflate(R.layout.alarm_row, null);
@@ -49,10 +50,17 @@ public class DoMoreAdapter extends BaseAdapter {
 
 		final HashMap<String, String> alarm = data.get(position);
 
+		Log.i("", alarm.get("time"));
+		Log.i("", alarm.get("day"));
+		Log.i("", alarm.get("state"));
+		Log.i("", "----------------");
+
 		time.setText(alarm.get("time"));
 		day.setText(alarm.get("day"));
 		if (alarm.get("state").equals("On")) {
 			onOff.setChecked(true);
+		} else if (alarm.get("state").equals("Off")) {
+			onOff.setChecked(false);
 		}
 
 		onOff.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -60,15 +68,29 @@ public class DoMoreAdapter extends BaseAdapter {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				Alarm alarmActivity = (Alarm) DoMoreAdapter.this.activity;
+				alarmActivity.db.open();
 				if (isChecked) {
-					buttonView.setChecked(false);
-					alarmActivity.db.update(alarm.get("time"),
-							alarm.get("day"), "Off");
-				} else {
 					buttonView.setChecked(true);
 					alarmActivity.db.update(alarm.get("time"),
 							alarm.get("day"), "On");
+					data.remove(position);
+					HashMap<String, String> update = new HashMap<String, String>();
+					update.put("time", alarm.get("time"));
+					update.put("day", alarm.get("day"));
+					update.put("state", "On");
+					data.add(position, update);
+				} else {
+					buttonView.setChecked(false);
+					alarmActivity.db.update(alarm.get("time"),
+							alarm.get("day"), "Off");
+					data.remove(position);
+					HashMap<String, String> update = new HashMap<String, String>();
+					update.put("time", alarm.get("time"));
+					update.put("day", alarm.get("day"));
+					update.put("state", "Off");
+					data.add(position, update);
 				}
+				alarmActivity.db.close();
 			}
 		});
 

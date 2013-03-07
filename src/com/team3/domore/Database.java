@@ -13,6 +13,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 @SuppressLint("SdCardPath")
 public class Database {
@@ -68,6 +69,7 @@ public class Database {
 	public void update(String time, String day, String newState) {
 		String sql = "UPDATE " + tableName + " SET state = '" + newState
 				+ "' WHERE time = '" + time + "' AND day = '" + day + "'";
+		Log.w("", sql);
 		this.db.execSQL(sql);
 	}
 

@@ -5,50 +5,34 @@
     tools:context=".AddAlarm" >
 
     <TextView
-        android:id="@+id/month_text"
-        android:text="@string/month_text"
+        android:id="@+id/timeTxt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+    <Button
+        android:id="@+id/dateBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Date"
+        android:onClick="chooseDate"
+		android:layout_below="@+id/timeTxt"
+        />
+    <Button
+        android:id="@+id/timeBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Time"
+        android:onClick="chooseTime"
+        android:layout_below="@+id/dateBtn"
+        />
+   	
+   	<Button
+        android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:textSize="17dp" />
-        
-    <Spinner
-        android:id="@+id/month"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/month_text"
-         />
-
-    <TextView
-        android:id="@+id/day_text"
-        android:text="@string/day_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-		android:layout_toRightOf="@+id/month"
-        android:textSize="17dp" />
-     
-    <Spinner
-        android:id="@+id/day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/day_text"
-        android:layout_centerHorizontal="true" />
-    
-    <Spinner
-        android:id="@+id/hour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/day"
-        android:layout_centerHorizontal="true" />
-    
-    <Spinner
-        android:id="@+id/minutes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hour"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/timeBtn"
+        android:layout_marginTop="10dp"
+        android:text="Save" />
 
 </RelativeLayout>

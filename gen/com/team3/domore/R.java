@@ -18,20 +18,19 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int add_button=0x7f080006;
-        public static final int alarm=0x7f08000a;
-        public static final int alarm_list=0x7f080007;
-        public static final int day=0x7f080003;
-        public static final int day_text=0x7f080002;
-        public static final int hour=0x7f080004;
-        public static final int menu_settings=0x7f08000d;
-        public static final int minutes=0x7f080005;
-        public static final int month=0x7f080001;
-        public static final int month_text=0x7f080000;
-        public static final int nearby=0x7f08000b;
-        public static final int on_off=0x7f080009;
-        public static final int search=0x7f08000c;
-        public static final int time=0x7f080008;
+        public static final int add_button=0x7f080004;
+        public static final int alarm=0x7f080009;
+        public static final int alarm_list=0x7f080005;
+        public static final int dateBtn=0x7f080001;
+        public static final int day=0x7f080008;
+        public static final int menu_settings=0x7f08000c;
+        public static final int nearby=0x7f08000a;
+        public static final int on_off=0x7f080007;
+        public static final int save_button=0x7f080003;
+        public static final int search=0x7f08000b;
+        public static final int time=0x7f080006;
+        public static final int timeBtn=0x7f080002;
+        public static final int timeTxt=0x7f080000;
     }
     public static final class layout {
         public static final int add_alarm=0x7f030000;

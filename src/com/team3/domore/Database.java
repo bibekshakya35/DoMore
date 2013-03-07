@@ -6,13 +6,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+@SuppressLint("SdCardPath")
 public class Database {
 	private String databaseName;
 	private String tableName;
@@ -63,11 +66,11 @@ public class Database {
 		}
 	}
 
-	public Cursor update(String time, String day, String newState) {
-		String sql = "UPDATE " + tableName + " SET state = " + newState
-				+ " WHERE time = " + time + " AND day = " + day;
-		Cursor cursor = this.db.rawQuery(sql, null);
-		return cursor;
+	public void update(String time, String day, String newState) {
+		String sql = "UPDATE " + tableName + " SET state = '" + newState
+				+ "' WHERE time = '" + time + "' AND day = '" + day + "'";
+		Log.w("", sql);
+		this.db.execSQL(sql);
 	}
 
 	public Cursor search(String key) {

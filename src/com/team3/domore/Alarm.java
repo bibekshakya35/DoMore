@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 public class Alarm extends Activity implements OnClickListener{
 	private ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
-	private DoMoreAdapter adapter;
+	public static DoMoreAdapter adapter;
 	public static Database db;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class Alarm extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch(v.getId()) {
 		case R.id.add_button:
+			finish();
 			startActivity(new Intent(this, AddAlarm.class));
 		}
 	}

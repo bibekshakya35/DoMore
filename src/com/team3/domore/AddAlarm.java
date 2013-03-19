@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+
 import java.text.DateFormat;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +22,7 @@ public class AddAlarm extends Activity implements OnClickListener{
 
 	private Button timeBtn;
 	private Button dateBtn;
+	private Button btnSave;
 	DateFormat formatDateTime=DateFormat.getDateTimeInstance();
 	Calendar dateTime=Calendar.getInstance();
 	private TextView timeLabel;
@@ -29,7 +32,7 @@ public class AddAlarm extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_alarm);		
 
-		Button btnSave = (Button) findViewById(R.id.save_button); 
+		btnSave = (Button) findViewById(R.id.save_button); 
 		btnSave.setOnClickListener(this);
 
 		timeLabel=(TextView)findViewById(R.id.timeTxt);
@@ -38,7 +41,13 @@ public class AddAlarm extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		HashMap<String, String> alarm = new HashMap<String, String>();
+		switch (v.getId()) {
+		case R.id.save_button:
+			Alarm.db.open();
+			Alarm.db.addEntry(dateTime);
+			this.finish();
+			startActivity(new Intent(this, Alarm.class));
+		}
 	}
 
 	public void chooseDate(View v){

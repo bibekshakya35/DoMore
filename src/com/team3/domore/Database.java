@@ -76,16 +76,15 @@ public class Database {
 	}
 
 	public void addEntry(Calendar cal) {
-		String time = cal.getDisplayName(cal.HOUR_OF_DAY, cal.SHORT,
-				Locale.getDefault())
+		String time = cal.get(cal.HOUR_OF_DAY)
 				+ ":"
-				+ cal.getDisplayName(cal.MINUTE, cal.SHORT, Locale.getDefault());
+				+ cal.get(cal.MINUTE);
 		String day = cal.getDisplayName(cal.MONTH, cal.SHORT,
 				Locale.getDefault())
 				+ " "
-				+ cal.getDisplayName(cal.DATE, cal.SHORT, Locale.getDefault());
+				+ cal.get(cal.DATE);
 		String sql = "INSERT INTO " + tableName + " VALUES ('" + time + "' , '"
-				+ day + "' , 'On'";
+				+ day + "' , 'On')";
 		this.db.execSQL(sql);
 	}
 

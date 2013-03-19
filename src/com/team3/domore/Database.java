@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -70,6 +72,20 @@ public class Database {
 		String sql = "UPDATE " + tableName + " SET state = '" + newState
 				+ "' WHERE time = '" + time + "' AND day = '" + day + "'";
 		Log.w("", sql);
+		this.db.execSQL(sql);
+	}
+
+	public void addEntry(Calendar cal) {
+		String time = cal.getDisplayName(cal.HOUR_OF_DAY, cal.SHORT,
+				Locale.getDefault())
+				+ ":"
+				+ cal.getDisplayName(cal.MINUTE, cal.SHORT, Locale.getDefault());
+		String day = cal.getDisplayName(cal.MONTH, cal.SHORT,
+				Locale.getDefault())
+				+ " "
+				+ cal.getDisplayName(cal.DATE, cal.SHORT, Locale.getDefault());
+		String sql = "INSERT INTO " + tableName + " VALUES ('" + time + "' , '"
+				+ day + "' , 'On'";
 		this.db.execSQL(sql);
 	}
 

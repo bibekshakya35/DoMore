@@ -1,6 +1,7 @@
 package com.team3.domore;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,21 +11,19 @@ import java.text.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class AddAlarm extends Activity implements OnClickListener{
 
-	 private Button timeBtn;
-		private Button dateBtn;
-		DateFormat formatDateTime=DateFormat.getDateTimeInstance();
-		Calendar dateTime=Calendar.getInstance();
-		private TextView timeLabel;
-	
+	private Button timeBtn;
+	private Button dateBtn;
+	DateFormat formatDateTime=DateFormat.getDateTimeInstance();
+	Calendar dateTime=Calendar.getInstance();
+	private TextView timeLabel;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,26 +31,25 @@ public class AddAlarm extends Activity implements OnClickListener{
 
 		Button btnSave = (Button) findViewById(R.id.save_button); 
 		btnSave.setOnClickListener(this);
-		
+
 		timeLabel=(TextView)findViewById(R.id.timeTxt);
-        updateLabel();
+		updateLabel();
 	}
 
 	@Override
 	public void onClick(View v) {
-		// Save to database
-		
+		HashMap<String, String> alarm = new HashMap<String, String>();
 	}
-	
+
 	public void chooseDate(View v){
-    	new DatePickerDialog(AddAlarm.this, d, dateTime.get(Calendar.YEAR),dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH)).show();
-    }
-	
-    public void chooseTime(View v){
-    	new TimePickerDialog(AddAlarm.this, t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true).show();
-    }
-    
-    DatePickerDialog.OnDateSetListener d=new DatePickerDialog.OnDateSetListener() {
+		new DatePickerDialog(AddAlarm.this, d, dateTime.get(Calendar.YEAR),dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH)).show();
+	}
+
+	public void chooseTime(View v){
+		new TimePickerDialog(AddAlarm.this, t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true).show();
+	}
+
+	DatePickerDialog.OnDateSetListener d=new DatePickerDialog.OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
 			dateTime.set(Calendar.YEAR,year);
@@ -60,7 +58,7 @@ public class AddAlarm extends Activity implements OnClickListener{
 			updateLabel();
 		}
 	};
-	
+
 	TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -72,7 +70,7 @@ public class AddAlarm extends Activity implements OnClickListener{
 	private void updateLabel() {
 		timeLabel.setText(formatDateTime.format( dateTime.getTime()));
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

@@ -15,7 +15,7 @@ import android.widget.ListView;
 public class Alarm extends Activity implements OnClickListener{
 	private ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 	private DoMoreAdapter adapter;
-	public Database db;
+	public static Database db;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -23,6 +23,8 @@ public final class R {
         public static final int alarm_list=0x7f080005;
         public static final int dateBtn=0x7f080001;
         public static final int day=0x7f080008;
+        public static final int delete=0x7f08000e;
+        public static final int edit=0x7f08000d;
         public static final int menu_settings=0x7f08000c;
         public static final int nearby=0x7f08000a;
         public static final int on_off=0x7f080007;
@@ -43,9 +45,10 @@ public final class R {
     public static final class menu {
         public static final int add_alarm=0x7f070000;
         public static final int alarm=0x7f070001;
-        public static final int home=0x7f070002;
-        public static final int nearby=0x7f070003;
-        public static final int search=0x7f070004;
+        public static final int alarm_popup=0x7f070002;
+        public static final int home=0x7f070003;
+        public static final int nearby=0x7f070004;
+        public static final int search=0x7f070005;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

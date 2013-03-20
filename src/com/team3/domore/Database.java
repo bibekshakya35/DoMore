@@ -88,6 +88,13 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
+	// Something wrong here?
+	public void deleteEntry(String time, String day) {
+		String sql = "DELETE FROM " + tableName + " WHERE time = '" + time + 
+				"' AND day = '" + day + "'";
+		this.db.execSQL(sql);
+	}
+	
 	public Cursor search(String key) {
 		try {
 			String sql = "SELECT * FROM " + tableName + " WHERE _id LIKE '%"
@@ -174,4 +181,6 @@ public class Database {
 			// does nothing
 		}
 	}
+
+	
 }

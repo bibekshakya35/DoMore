@@ -9,8 +9,13 @@ import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class Alarm extends Activity implements OnClickListener{
 	private ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
@@ -27,8 +32,9 @@ public class Alarm extends Activity implements OnClickListener{
 		final ListView list = (ListView) findViewById(R.id.alarm_list);
 
 		adapter = new DoMoreAdapter(this, data);
+		
 		list.setAdapter(adapter);
-
+		
 		db = new Database(this, "ALARMS.sqlite", "ALARM_TABLE");
 		db.createDatabase();
 		db.open();
@@ -62,5 +68,7 @@ public class Alarm extends Activity implements OnClickListener{
 			startActivity(new Intent(this, AddAlarm.class));
 		}
 	}
+	
+
 
 }

@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.view.View.OnLongClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 
 public class DoMoreAdapter extends BaseAdapter {
 	private Activity activity;
@@ -58,7 +66,6 @@ public class DoMoreAdapter extends BaseAdapter {
 		}
 
 		onOff.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				Alarm alarmActivity = (Alarm) DoMoreAdapter.this.activity;
@@ -85,6 +92,47 @@ public class DoMoreAdapter extends BaseAdapter {
 			}
 		});
 
+		/** Add on long click listener for each item (ie. to delete or edit) */
+		time.setOnLongClickListener(new OnLongClickListener() {
+			@Override
+			public boolean onLongClick(final View v) {
+				PopupMenu popup = new PopupMenu(v.getContext(), v);
+				popup.getMenuInflater().inflate(R.menu.alarm_popup, popup.getMenu());
+
+				popup.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						// If selected item is delete, remove from database and refresh screen
+						switch(item.getItemId()) {
+						case R.id.edit:
+							Toast.makeText(v.getContext(), "You selected the action : " + item.getTitle(), Toast.LENGTH_SHORT).show();		
+							break;
+						case R.id.delete:
+							Toast.makeText(v.getContext(), "You selected the action : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+										
+							alarm = data.get(position);
+							System.out.println(alarm.get("time"));
+							System.out.println(alarm.get("day"));
+							Alarm.db.open();
+							Alarm.db.deleteEntry(alarm.get("time"), alarm.get("day"));
+							Alarm.db.close();
+							
+						    Intent intent = new Intent(v.getContext(), Alarm.class);
+							v.getContext().startActivity(intent);
+
+							break;
+						}
+						return true;
+					}
+				});				
+				popup.show();
+
+				return false;
+			}			
+		});
+
 		return vi;
 	}
+
+
 }

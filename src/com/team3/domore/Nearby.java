@@ -2,9 +2,10 @@ package com.team3.domore;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 
-public class Nearby extends Activity {
+public class Nearby extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

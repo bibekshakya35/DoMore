@@ -39,6 +39,8 @@
             android:label="@string/title_activity_add_alarm" >
         </activity>
         
+        <uses-library android:name="com.google.android.maps" />
+        
         <meta-data
 		android:name="com.google.android.maps.v2.API_KEY"
 		android:value="AIzaSyDjNUD6SQDAZwTuC3z3qeD3f0fc_F2VoBQ" />

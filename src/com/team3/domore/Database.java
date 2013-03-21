@@ -88,7 +88,6 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
-	// Something wrong here?
 	public void deleteEntry(String time, String day) {
 		String sql = "DELETE FROM " + tableName + " WHERE time = '" + time + 
 				"' AND day = '" + day + "'";

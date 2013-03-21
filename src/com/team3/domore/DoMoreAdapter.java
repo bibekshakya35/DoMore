@@ -119,7 +119,8 @@ public class DoMoreAdapter extends BaseAdapter {
 							
 						    Intent intent = new Intent(v.getContext(), Alarm.class);
 							v.getContext().startActivity(intent);
-
+							((Activity)v.getContext()).finish();
+							
 							break;
 						}
 						return true;

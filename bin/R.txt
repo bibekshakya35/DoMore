@@ -23,7 +23,7 @@ int id day 0x7f04000d
 int id delete 0x7f040014
 int id edit 0x7f040013
 int id hybrid 0x7f040004
-int id map 0x7f040011
+int id mapview 0x7f040011
 int id menu_settings 0x7f040012
 int id nearby 0x7f04000f
 int id none 0x7f040000

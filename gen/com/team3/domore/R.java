@@ -144,7 +144,7 @@ containing a value of this type.
         public static final int delete=0x7f040014;
         public static final int edit=0x7f040013;
         public static final int hybrid=0x7f040004;
-        public static final int map=0x7f040011;
+        public static final int mapview=0x7f040011;
         public static final int menu_settings=0x7f040012;
         public static final int nearby=0x7f04000f;
         public static final int none=0x7f040000;

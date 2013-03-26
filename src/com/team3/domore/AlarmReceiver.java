@@ -31,7 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 			// Build the notification
 			Notification noti = new NotificationCompat.Builder(context)
 	         .setContentTitle("Food Time!")
-	         .setSmallIcon(R.drawable.ic_launcher)
+	         .setSmallIcon(R.drawable.hamburger)
 	         .setSound(uri)
 	         .setWhen(System.currentTimeMillis())
 	         .addAction(R.drawable.location, "Nearby", pendingIntent)

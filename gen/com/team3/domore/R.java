@@ -8,10 +8,6 @@
 package com.team3.domore;
 
 public final class R {
-    public static final class array {
-        public static final int day_array=0x7f060001;
-        public static final int months_array=0x7f060000;
-    }
     public static final class attr {
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
@@ -133,8 +129,9 @@ containing a value of this type.
         public static final int zOrderOnTop=0x7f01000d;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int location=0x7f020001;
+        public static final int hamburger=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int location=0x7f020002;
     }
     public static final class id {
         public static final int add_button=0x7f040009;
@@ -168,12 +165,12 @@ containing a value of this type.
         public static final int search=0x7f030005;
     }
     public static final class menu {
-        public static final int add_alarm=0x7f080000;
-        public static final int alarm=0x7f080001;
-        public static final int alarm_popup=0x7f080002;
-        public static final int home=0x7f080003;
-        public static final int nearby=0x7f080004;
-        public static final int search=0x7f080005;
+        public static final int add_alarm=0x7f070000;
+        public static final int alarm=0x7f070001;
+        public static final int alarm_popup=0x7f070002;
+        public static final int home=0x7f070003;
+        public static final int nearby=0x7f070004;
+        public static final int search=0x7f070005;
     }
     public static final class string {
         public static final int app_name=0x7f050011;
@@ -270,11 +267,11 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f060001;
     }
     public static final class styleable {
         /** Attributes that can be used with a MapAttrs.

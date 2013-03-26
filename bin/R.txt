@@ -1,5 +1,3 @@
-int array day_array 0x7f060001
-int array months_array 0x7f060000
 int attr cameraBearing 0x7f010001
 int attr cameraTargetLat 0x7f010002
 int attr cameraTargetLng 0x7f010003
@@ -14,8 +12,9 @@ int attr uiZoomControls 0x7f01000a
 int attr uiZoomGestures 0x7f01000b
 int attr useViewLifecycle 0x7f01000c
 int attr zOrderOnTop 0x7f01000d
-int drawable ic_launcher 0x7f020000
-int drawable location 0x7f020001
+int drawable hamburger 0x7f020000
+int drawable ic_launcher 0x7f020001
+int drawable location 0x7f020002
 int id add_button 0x7f040009
 int id alarm 0x7f04000e
 int id alarm_list 0x7f04000a
@@ -43,12 +42,12 @@ int layout alarm_row 0x7f030002
 int layout home 0x7f030003
 int layout nearby 0x7f030004
 int layout search 0x7f030005
-int menu add_alarm 0x7f080000
-int menu alarm 0x7f080001
-int menu alarm_popup 0x7f080002
-int menu home 0x7f080003
-int menu nearby 0x7f080004
-int menu search 0x7f080005
+int menu add_alarm 0x7f070000
+int menu alarm 0x7f070001
+int menu alarm_popup 0x7f070002
+int menu home 0x7f070003
+int menu nearby 0x7f070004
+int menu search 0x7f070005
 int string app_name 0x7f050011
 int string auth_client_availability_notification_title 0x7f05000e
 int string auth_client_play_services_err_notification_msg 0x7f05000f
@@ -75,8 +74,8 @@ int string title_activity_add_alarm 0x7f050017
 int string title_activity_alarm 0x7f050014
 int string title_activity_nearby 0x7f050015
 int string title_activity_search 0x7f050016
-int style AppBaseTheme 0x7f070000
-int style AppTheme 0x7f070001
+int style AppBaseTheme 0x7f060000
+int style AppTheme 0x7f060001
 int[] styleable MapAttrs { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d }
 int styleable MapAttrs_cameraBearing 1
 int styleable MapAttrs_cameraTargetLat 2

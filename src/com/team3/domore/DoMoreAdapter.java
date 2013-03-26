@@ -3,6 +3,8 @@ package com.team3.domore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -81,6 +83,12 @@ public class DoMoreAdapter extends BaseAdapter {
 							alarm.get("day"), "On");
 					update.put("state", "On");
 					data.set(position, update);
+					
+//					Intent intent = new Intent(v.getContext(), AlarmReceiver.class);
+//					 intent.putExtra("alarm_message", "O'Doyle Rules!");
+//					 PendingIntent sender = PendingIntent.getBroadcast(v.getContext(), 192837, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//					 AlarmManager am = (AlarmManager) v.getContext().getSystemService(Context.ALARM_SERVICE);
+//					 am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), sender);
 				} else {
 					button.setChecked(false);
 					alarmActivity.db.update(alarm.get("time"),

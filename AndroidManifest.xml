@@ -39,6 +39,7 @@
             android:label="@string/title_activity_add_alarm" >
         </activity>
         
+        <receiver  android:process=":remote" android:name="AlarmReceiver"></receiver>
         <uses-library android:name="com.google.android.maps" />
         
         <meta-data

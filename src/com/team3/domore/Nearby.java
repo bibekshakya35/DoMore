@@ -44,8 +44,7 @@ public class Nearby extends FragmentActivity {
             Toast.makeText(this, "GPS signal not found", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
-        }
-                
+        }               
         map.setMyLocationEnabled(true);
         map.getMyLocation();
 	}

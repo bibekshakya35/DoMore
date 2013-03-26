@@ -15,6 +15,7 @@ int attr uiZoomGestures 0x7f01000b
 int attr useViewLifecycle 0x7f01000c
 int attr zOrderOnTop 0x7f01000d
 int drawable ic_launcher 0x7f020000
+int drawable location 0x7f020001
 int id add_button 0x7f040009
 int id alarm 0x7f04000e
 int id alarm_list 0x7f04000a

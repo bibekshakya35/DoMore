@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Eat Moar</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
@@ -9,4 +10,6 @@
     <string name="title_activity_add_alarm">AddAlarm</string>
     <string name="month_text">Month</string>
     <string name="day_text">Day</string>
+    <string name="title_activity_single_place">SinglePlace</string>
+
 </resources>

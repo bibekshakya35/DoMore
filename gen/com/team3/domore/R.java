@@ -137,40 +137,48 @@ containing a value of this type.
         public static final int add_button=0x7f040009;
         public static final int alarm=0x7f04000e;
         public static final int alarm_list=0x7f04000a;
+        public static final int btn_show_map=0x7f040012;
         public static final int dateBtn=0x7f040006;
         public static final int day=0x7f04000d;
-        public static final int delete=0x7f040014;
-        public static final int edit=0x7f040013;
+        public static final int delete=0x7f040018;
+        public static final int edit=0x7f040017;
         public static final int hybrid=0x7f040004;
+        public static final int list=0x7f040013;
         public static final int mapview=0x7f040011;
-        public static final int menu_settings=0x7f040012;
+        public static final int menu_settings=0x7f040016;
+        public static final int name=0x7f040015;
         public static final int nearby=0x7f04000f;
+        public static final int nearbylist=0x7f040010;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int on_off=0x7f04000c;
+        public static final int reference=0x7f040014;
         public static final int satellite=0x7f040002;
         public static final int save_button=0x7f040008;
-        public static final int search=0x7f040010;
         public static final int terrain=0x7f040003;
         public static final int time=0x7f04000b;
         public static final int timeBtn=0x7f040007;
         public static final int timeTxt=0x7f040005;
     }
     public static final class layout {
-        public static final int add_alarm=0x7f030000;
-        public static final int alarm=0x7f030001;
-        public static final int alarm_row=0x7f030002;
-        public static final int home=0x7f030003;
-        public static final int nearby=0x7f030004;
-        public static final int search=0x7f030005;
+        public static final int activity_single_place=0x7f030000;
+        public static final int add_alarm=0x7f030001;
+        public static final int alarm=0x7f030002;
+        public static final int alarm_row=0x7f030003;
+        public static final int home=0x7f030004;
+        public static final int nearby=0x7f030005;
+        public static final int nearby_list=0x7f030006;
+        public static final int nearby_row=0x7f030007;
     }
     public static final class menu {
-        public static final int add_alarm=0x7f070000;
-        public static final int alarm=0x7f070001;
-        public static final int alarm_popup=0x7f070002;
-        public static final int home=0x7f070003;
-        public static final int nearby=0x7f070004;
-        public static final int search=0x7f070005;
+        public static final int activity_single_place=0x7f070000;
+        public static final int add_alarm=0x7f070001;
+        public static final int alarm=0x7f070002;
+        public static final int alarm_popup=0x7f070003;
+        public static final int home=0x7f070004;
+        public static final int nearby=0x7f070005;
+        public static final int nearby_list=0x7f070006;
+        public static final int search=0x7f070007;
     }
     public static final class string {
         public static final int app_name=0x7f050011;
@@ -244,6 +252,7 @@ containing a value of this type.
         public static final int title_activity_alarm=0x7f050014;
         public static final int title_activity_nearby=0x7f050015;
         public static final int title_activity_search=0x7f050016;
+        public static final int title_activity_single_place=0x7f05001a;
     }
     public static final class style {
         /** 

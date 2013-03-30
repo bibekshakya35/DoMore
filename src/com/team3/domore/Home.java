@@ -21,8 +21,8 @@ public class Home extends Activity implements OnClickListener {
 		View btnNearby=(Button)findViewById(R.id.nearby);
 		btnNearby.setOnClickListener(this);
 		
-		View btnSearch=(Button)findViewById(R.id.search);
-		btnSearch.setOnClickListener(this);
+		View btnNearby2=(Button)findViewById(R.id.nearbylist);
+		btnNearby2.setOnClickListener(this);
 	}
 
 	@Override
@@ -41,8 +41,8 @@ public class Home extends Activity implements OnClickListener {
 		case R.id.nearby:
 			startActivity(new Intent(this, Nearby.class));
 			break;
-		case R.id.search:
-			startActivity(new Intent(this, Search.class));
+		case R.id.nearbylist:
+			startActivity(new Intent(this, NearbyList.class));
 			break;
 		}
 	}

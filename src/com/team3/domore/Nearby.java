@@ -16,11 +16,6 @@ import android.widget.Toast;
 public class Nearby extends FragmentActivity {
 
 	private GoogleMap map;
-	private LocationManager locationManager;
-	private Location location;
-	private String provider;
-	public static double longitude;
-	public static double latitude;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,40 +38,9 @@ public class Nearby extends FragmentActivity {
 			startActivity(intent);
 		}
 
-		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
 		map.setMyLocationEnabled(true);
 		map.getMyLocation();
-
-		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 10,
-				locationListener);
 	}
-
-	private final LocationListener locationListener = new LocationListener() {
-		public void onLocationChanged(Location location) {
-			longitude = location.getLongitude();
-			latitude = location.getLatitude();
-			System.out.println(latitude + ", " + longitude);
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			// TODO Auto-generated method stub
-
-		}
-	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,5 +48,4 @@ public class Nearby extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.nearby, menu);
 		return true;
 	}
-
 }

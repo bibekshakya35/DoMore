@@ -18,7 +18,8 @@ public class AlarmFrag extends Fragment implements OnClickListener {
 	private ArrayList<CalendarInfo> data = new ArrayList<CalendarInfo>();
 	public static DoMoreAdapter adapter;
 	public static Database db;
-
+	public ListView list;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -31,8 +32,7 @@ public class AlarmFrag extends Fragment implements OnClickListener {
 		View btnAdd = (Button) getView().findViewById(R.id.add_button);
 		btnAdd.setOnClickListener(this);
 
-		final ListView list = (ListView) getView()
-				.findViewById(R.id.alarm_list);
+		list = (ListView) getView().findViewById(R.id.alarm_list);
 
 		adapter = new DoMoreAdapter(getActivity(), data);
 

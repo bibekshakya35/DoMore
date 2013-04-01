@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"> 
  
-    <!-- Show on Map button -->
     <Button android:id="@+id/btn_show_map"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -12,11 +11,11 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dip"/>
  
-    <!--  List view -->
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
         android:layout_below="@id/btn_show_map"/>
  
 </RelativeLayout>

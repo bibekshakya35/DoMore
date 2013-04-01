@@ -29,7 +29,7 @@ public class TabActivity extends FragmentActivity {
 				AlarmFrag.class, null);
 		mTabManager.addTab(
 				mTabHost.newTabSpec("nearby").setIndicator("Nearby"),
-				AlarmFrag.class, null);
+				NearbyList.class, null);
 		/*mTabManager.addTab(
 				mTabHost.newTabSpec("restaurants").setIndicator("Restaurants"),
 				AlarmFrag.class, null);*/

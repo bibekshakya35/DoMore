@@ -36,7 +36,7 @@ public class Home extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.alarm:
-			startActivity(new Intent(this, Alarm.class));
+			startActivity(new Intent(this, AlarmFrag.class));
 			break;
 		case R.id.nearby:
 			startActivity(new Intent(this, Nearby.class));

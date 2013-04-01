@@ -19,8 +19,8 @@ int id add_button 0x7f040009
 int id alarm 0x7f04000e
 int id alarm_list 0x7f04000a
 int id btn_show_map 0x7f040012
+int id date 0x7f04000d
 int id dateBtn 0x7f040006
-int id day 0x7f04000d
 int id delete 0x7f040018
 int id edit 0x7f040017
 int id hybrid 0x7f040004
@@ -42,12 +42,13 @@ int id timeBtn 0x7f040007
 int id timeTxt 0x7f040005
 int layout activity_single_place 0x7f030000
 int layout add_alarm 0x7f030001
-int layout alarm 0x7f030002
+int layout alarm_frag 0x7f030002
 int layout alarm_row 0x7f030003
 int layout home 0x7f030004
 int layout nearby 0x7f030005
 int layout nearby_list 0x7f030006
 int layout nearby_row 0x7f030007
+int layout tabs 0x7f030008
 int menu activity_single_place 0x7f070000
 int menu add_alarm 0x7f070001
 int menu alarm 0x7f070002

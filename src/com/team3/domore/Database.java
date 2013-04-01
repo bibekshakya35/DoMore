@@ -6,20 +6,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.view.View;
 
 @SuppressLint("SdCardPath")
 public class Database {
@@ -72,32 +66,43 @@ public class Database {
 		}
 	}
 
-	public void update(String time, String day, String newState) {
+	public void update(Calendar cal, boolean newState) {
 		String sql = "UPDATE " + tableName + " SET state = '" + newState
-				+ "' WHERE time = '" + time + "' AND day = '" + day + "'";
+				+ "' WHERE hour = '" + cal.get(Calendar.HOUR_OF_DAY)
+				+ "' AND minute = '" + cal.get(Calendar.MINUTE)
+				+ "' AND month = '" + cal.get(Calendar.MONTH) + "' AND day = '"
+				+ cal.get(Calendar.DAY_OF_MONTH) + "' AND year = '"
+				+ cal.get(Calendar.YEAR) + "'";
 		Log.w("", sql);
 		this.db.execSQL(sql);
 	}
 
 	public void addEntry(Calendar cal) {
-		String time = cal.get(cal.HOUR_OF_DAY)
-				+ ":"
-				+ cal.get(cal.MINUTE);
-		String day = cal.getDisplayName(cal.MONTH, cal.SHORT,
-				Locale.getDefault())
-				+ " "
-				+ cal.get(cal.DATE);
-		String sql = "INSERT INTO " + tableName + " VALUES ('" + time + "' , '"
-				+ day + "' , 'On')";
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minute = cal.get(Calendar.MINUTE);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int year = cal.get(Calendar.YEAR);
+		String sql = "INSERT INTO " + tableName + " VALUES ('" + hour + "' , '"
+				+ minute + "' , '" + month + "' , '" + day + "' , '" + year
+				+ "' , 'true')";
+		Log.w("", sql);
 		this.db.execSQL(sql);
 	}
 
-	public void deleteEntry(String time, String day) {
-		String sql = "DELETE FROM " + tableName + " WHERE time = '" + time + 
-				"' AND day = '" + day + "'";
+	public void deleteEntry(Calendar cal) {
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minute = cal.get(Calendar.MINUTE);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int year = cal.get(Calendar.YEAR);
+		String sql = "DELETE FROM " + tableName + " WHERE hour = '" + hour
+				+ "' AND minute = '" + minute + "' AND month = '" + month
+				+ "' AND day = '" + day + "' AND year = '" + year + "'";
+		Log.w("", sql);
 		this.db.execSQL(sql);
 	}
-	
+
 	public Cursor search(String key) {
 		try {
 			String sql = "SELECT * FROM " + tableName + " WHERE _id LIKE '%"
@@ -185,5 +190,4 @@ public class Database {
 		}
 	}
 
-	
 }

@@ -138,8 +138,8 @@ containing a value of this type.
         public static final int alarm=0x7f04000e;
         public static final int alarm_list=0x7f04000a;
         public static final int btn_show_map=0x7f040012;
+        public static final int date=0x7f04000d;
         public static final int dateBtn=0x7f040006;
-        public static final int day=0x7f04000d;
         public static final int delete=0x7f040018;
         public static final int edit=0x7f040017;
         public static final int hybrid=0x7f040004;
@@ -163,12 +163,13 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_single_place=0x7f030000;
         public static final int add_alarm=0x7f030001;
-        public static final int alarm=0x7f030002;
+        public static final int alarm_frag=0x7f030002;
         public static final int alarm_row=0x7f030003;
         public static final int home=0x7f030004;
         public static final int nearby=0x7f030005;
         public static final int nearby_list=0x7f030006;
         public static final int nearby_row=0x7f030007;
+        public static final int tabs=0x7f030008;
     }
     public static final class menu {
         public static final int activity_single_place=0x7f070000;

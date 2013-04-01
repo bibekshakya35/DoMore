@@ -56,6 +56,7 @@ public class AddAlarm extends Activity implements OnClickListener {
 			AlarmFrag.db.addEntry(dateTime);
 			AlarmFrag.db.close();
 			this.finish();
+			startActivity(new Intent(this, TabActivity.class));
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -103,25 +104,24 @@ public class DoMoreAdapter extends BaseAdapter {
 									v.getContext(),
 									"You selected the action : "
 											+ item.getTitle(),
-									Toast.LENGTH_SHORT).show();
+											Toast.LENGTH_SHORT).show();
 							break;
 						case R.id.delete:
 							Toast.makeText(
 									v.getContext(),
 									"You selected the action : "
 											+ item.getTitle(),
-									Toast.LENGTH_SHORT).show();
+											Toast.LENGTH_SHORT).show();
 
 							alarm = data.get(position);
 							AlarmFrag.db.open();
 							AlarmFrag.db.deleteEntry(alarm.cal);
 							AlarmFrag.db.close();
-
-							/*
-							 * Intent intent = new Intent(v.getContext(),
-							 * TabActivity.class);
-							 * v.getContext().startActivity(intent);
-							 */
+							
+							// There must be a better way to do this
+							Intent intent = new Intent(v.getContext(),
+									TabActivity.class);
+							v.getContext().startActivity(intent);
 
 							break;
 						}

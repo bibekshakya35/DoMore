@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -21,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class AddAlarm extends Activity implements OnClickListener {
 
@@ -53,10 +51,14 @@ public class AddAlarm extends Activity implements OnClickListener {
 			am.set(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), sender);
 
 			AlarmFrag.db.open();
-			AlarmFrag.db.addEntry(dateTime);
+			boolean success = AlarmFrag.db.addEntry(dateTime);
 			AlarmFrag.db.close();
-			this.finish();
-			startActivity(new Intent(this, TabActivity.class));
+			if (success) {
+				this.finish();
+			} else {
+				Toast.makeText(this, "Duplicate found!", Toast.LENGTH_LONG)
+						.show();
+			}
 		}
 	}
 

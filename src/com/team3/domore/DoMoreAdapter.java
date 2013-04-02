@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -113,15 +112,12 @@ public class DoMoreAdapter extends BaseAdapter {
 											+ item.getTitle(),
 											Toast.LENGTH_SHORT).show();
 
-							alarm = data.get(position);
+							alarm = data.remove(position);
 							AlarmFrag.db.open();
 							AlarmFrag.db.deleteEntry(alarm.cal);
 							AlarmFrag.db.close();
 							
-							// There must be a better way to do this
-							Intent intent = new Intent(v.getContext(),
-									TabActivity.class);
-							v.getContext().startActivity(intent);
+							AlarmFrag.adapter.notifyDataSetChanged();
 
 							break;
 						}

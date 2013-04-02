@@ -3,14 +3,14 @@ package com.team3.domore;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -29,11 +29,13 @@ public class AlarmFrag extends Fragment implements OnClickListener {
 	@Override
 	public void onStart() {
 		super.onStart();
+		
 		View btnAdd = (Button) getView().findViewById(R.id.add_button);
 		btnAdd.setOnClickListener(this);
 
 		list = (ListView) getView().findViewById(R.id.alarm_list);
 
+		data.clear();
 		adapter = new DoMoreAdapter(getActivity(), data);
 
 		list.setAdapter(adapter);

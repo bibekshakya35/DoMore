@@ -34,8 +34,6 @@ public class NearbyList extends Fragment {
 
 	// Places List
 	PlacesList nearPlaces;
-
-	// Places Listview
 	ListView lv;
 
 	// ListItems data
@@ -60,10 +58,10 @@ public class NearbyList extends Fragment {
 	public void onStart() {
 		super.onStart();
 
-		// Getting listview
+		placesListItems.clear();
+		
 		lv = (ListView) getView().findViewById(R.id.list);
 
-		// button show on map
 		btnShowOnMap = (Button) getView().findViewById(R.id.btn_show_map);
 
 		gps = new TrackGPS(getActivity());
@@ -91,7 +89,6 @@ public class NearbyList extends Fragment {
 
 				// passing near places to map activity
 				i.putExtra("near_places", nearPlaces);
-				// staring activity
 				startActivity(i);
 			}
 		});

@@ -77,7 +77,7 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
-	public void addEntry(Calendar cal) {
+	public boolean addEntry(Calendar cal) {
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minute = cal.get(Calendar.MINUTE);
 		int month = cal.get(Calendar.MONTH);
@@ -86,8 +86,20 @@ public class Database {
 		String sql = "INSERT INTO " + tableName + " VALUES ('" + hour + "' , '"
 				+ minute + "' , '" + month + "' , '" + day + "' , '" + year
 				+ "' , 'true')";
-		Log.w("", sql);
-		this.db.execSQL(sql);
+
+		String sql2 = "SELECT * FROM " + tableName + " WHERE hour = '" + hour
+				+ "' AND minute = '" + minute + "' AND month = '" + month
+				+ "' AND day = '" + day + "' AND year = '" + year + "'";
+
+		Log.w("", sql2);
+		Cursor cursor = this.db.rawQuery(sql2, null);
+
+		if (cursor.getCount() == 0) {
+			Log.w("", sql);
+			this.db.execSQL(sql);
+			return true;
+		}
+		return false;
 	}
 
 	public void deleteEntry(Calendar cal) {

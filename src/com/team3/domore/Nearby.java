@@ -53,10 +53,10 @@ public class Nearby extends FragmentActivity {
 		map.addMarker(new MarkerOptions()
 		.position(myLoc)
 		.title("You Are Here")
-		.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+		.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 		map.getUiSettings().setCompassEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(true);
-		map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLoc, 13));
+		map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLoc, 14));
 		
 		/**
 		 * Display blue marker for each place
@@ -67,7 +67,7 @@ public class Nearby extends FragmentActivity {
 			.position(placeLoc)
 			.title(p.name)
 			.snippet(p.vicinity)
-			.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+			.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 		}
 	}
 }

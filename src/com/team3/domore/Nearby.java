@@ -19,20 +19,20 @@ import android.widget.Toast;
 public class Nearby extends FragmentActivity {
 
 	private GoogleMap map;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nearby);
 
-		map = ((SupportMapFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.mapview)).getMap();
+		Intent i = getIntent();
+		PlacesList nearPlaces = (PlacesList) i.getSerializableExtra("near_places");
+		
+		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview)).getMap();
 
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		boolean enabledGPS = service
-				.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		boolean enabledWiFi = service
-				.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		boolean enabledGPS = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
 		if (!enabledGPS) {
 			Toast.makeText(this, "GPS signal not found", Toast.LENGTH_LONG)
@@ -55,12 +55,15 @@ public class Nearby extends FragmentActivity {
 		map.getUiSettings().setCompassEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(true);
 		map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLoc, 13));
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.nearby, menu);
-		return true;
+		
+		for (Place p : nearPlaces.results) {
+			LatLng placeLoc = new LatLng(p.geometry.location.lat, p.geometry.location.lng);
+			
+			map.addMarker(new MarkerOptions()
+			.position(placeLoc)
+			.title(p.name)
+			.snippet(p.vicinity)
+			.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+		}
 	}
 }

@@ -15,6 +15,7 @@ int attr zOrderOnTop 0x7f01000d
 int drawable hamburger 0x7f020000
 int drawable ic_launcher 0x7f020001
 int drawable location 0x7f020002
+int drawable trash 0x7f020003
 int id add_button 0x7f040009
 int id address 0x7f040016
 int id alarm 0x7f04000e

@@ -65,6 +65,9 @@ public class DoMoreAdapter extends BaseAdapter {
 			onOff.setChecked(false);
 		}
 
+		/**
+		 * Button to toggle the alarm on or off
+		 */
 		onOff.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -84,7 +87,9 @@ public class DoMoreAdapter extends BaseAdapter {
 			}
 		});
 
-		/** Add on long click listener for each item (ie. to delete or edit) */
+		/** 
+		 * Add on long click listener for each item to with option to delete
+		 */
 		time.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(final View v) {
@@ -95,8 +100,7 @@ public class DoMoreAdapter extends BaseAdapter {
 				popup.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						// If selected item is delete, remove from database and
-						// refresh screen
+
 						switch (item.getItemId()) {
 						case R.id.edit:
 							Toast.makeText(
@@ -106,19 +110,11 @@ public class DoMoreAdapter extends BaseAdapter {
 											Toast.LENGTH_SHORT).show();
 							break;
 						case R.id.delete:
-							Toast.makeText(
-									v.getContext(),
-									"You selected the action : "
-											+ item.getTitle(),
-											Toast.LENGTH_SHORT).show();
-
 							alarm = data.remove(position);
 							AlarmFrag.db.open();
 							AlarmFrag.db.deleteEntry(alarm.cal);
 							AlarmFrag.db.close();
-							
 							AlarmFrag.adapter.notifyDataSetChanged();
-
 							break;
 						}
 						return true;

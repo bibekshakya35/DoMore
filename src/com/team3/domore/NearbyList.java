@@ -59,11 +59,8 @@ public class NearbyList extends Fragment {
 		super.onStart();
 
 		placesListItems.clear();
-		
 		lv = (ListView) getView().findViewById(R.id.list);
-
 		btnShowOnMap = (Button) getView().findViewById(R.id.btn_show_map);
-
 		gps = new TrackGPS(getActivity());
 
 		if (gps.canGetLocation()) {
@@ -143,11 +140,8 @@ public class NearbyList extends Fragment {
 			googlePlaces = new GooglePlaces();
 
 			try {
-
 				String types = "restaurant|cafe";
-
 				int radius = 1000; 
-
 				nearPlaces = googlePlaces.search(gps.getLatitude(),
 						gps.getLongitude(), radius, types);
 
@@ -165,7 +159,6 @@ public class NearbyList extends Fragment {
 		 * **/
 		protected void onPostExecute(String file_url) {
 
-			// Dismiss dialog
 			pDialog.dismiss();
 
 			/**
@@ -204,7 +197,6 @@ public class NearbyList extends Fragment {
 			}
 			else if(status.equals("ZERO_RESULTS")){
 				// Zero results found
-
 			}
 			else if(status.equals("UNKNOWN_ERROR"))
 			{

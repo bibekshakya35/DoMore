@@ -1,7 +1,13 @@
 package com.team3.domore;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -30,13 +36,25 @@ public class Nearby extends FragmentActivity {
 
 		if (!enabledGPS) {
 			Toast.makeText(this, "GPS signal not found", Toast.LENGTH_LONG)
-					.show();
+			.show();
 			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 			startActivity(intent);
 		}
 
 		map.setMyLocationEnabled(true);
 		map.getMyLocation();
+		
+		TrackGPS gps = new TrackGPS(this);
+		
+		LatLng myLoc = new LatLng(gps.getLatitude(), gps.getLongitude());
+		
+		map.addMarker(new MarkerOptions()
+		.position(myLoc)
+		.title("You Are Here")
+		.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+		map.getUiSettings().setCompassEnabled(true);
+		map.getUiSettings().setZoomControlsEnabled(true);
+		map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLoc, 13));
 	}
 
 	@Override

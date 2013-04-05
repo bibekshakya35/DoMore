@@ -74,7 +74,6 @@ public class SinglePlace extends Activity {
 				Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
 						Uri.parse("google.navigation:q="+uri));
 				startActivity(intent);
-
 			}
 		});
 	}

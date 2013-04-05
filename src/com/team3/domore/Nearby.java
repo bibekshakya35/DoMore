@@ -46,8 +46,10 @@ public class Nearby extends FragmentActivity {
 		
 		TrackGPS gps = new TrackGPS(this);
 		
+		/**
+		 * Display red marker for user location
+		 */
 		LatLng myLoc = new LatLng(gps.getLatitude(), gps.getLongitude());
-		
 		map.addMarker(new MarkerOptions()
 		.position(myLoc)
 		.title("You Are Here")
@@ -56,9 +58,11 @@ public class Nearby extends FragmentActivity {
 		map.getUiSettings().setZoomControlsEnabled(true);
 		map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLoc, 13));
 		
+		/**
+		 * Display blue marker for each place
+		 */
 		for (Place p : nearPlaces.results) {
-			LatLng placeLoc = new LatLng(p.geometry.location.lat, p.geometry.location.lng);
-			
+			LatLng placeLoc = new LatLng(p.geometry.location.lat, p.geometry.location.lng);	
 			map.addMarker(new MarkerOptions()
 			.position(placeLoc)
 			.title(p.name)

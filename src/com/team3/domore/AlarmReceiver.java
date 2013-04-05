@@ -22,7 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 			
 			// Create the intent to launch when "nearby" button is clicked
 			PendingIntent pendingIntent;
-	        Intent i = new Intent(context, Nearby.class);
+	        Intent i = new Intent(context, NearbyList.class);
 	        pendingIntent =  PendingIntent.getActivity(context, 0, i, 0);
 			
 			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

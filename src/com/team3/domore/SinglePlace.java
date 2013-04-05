@@ -1,8 +1,10 @@
 package com.team3.domore;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class SinglePlace extends Activity {
@@ -17,6 +20,13 @@ public class SinglePlace extends Activity {
 	GooglePlaces googlePlaces;
 	PlaceDetails placeDetails;
 	ProgressDialog pDialog;
+	String name;
+	String phone;
+	String address;
+	String latitude;
+	String longitude;
+	Button btnPhone;
+	Button btnNav;
 
 	// KEY Strings
 	public static String KEY_REFERENCE = "reference"; // id of the place
@@ -32,6 +42,41 @@ public class SinglePlace extends Activity {
 		String reference = i.getStringExtra(KEY_REFERENCE);
 
 		new LoadSinglePlaceDetails().execute(reference);
+
+		btnPhone = (Button) findViewById(R.id.btn_phone);
+		btnNav = (Button) findViewById(R.id.btn_nav);
+
+		/** 
+		 * Button click for calling the restaurant 
+		 * */
+		btnPhone.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String uri = "tel:"+phone.trim();
+				Intent intent = new Intent(Intent.ACTION_DIAL);
+				intent.setData(Uri.parse(uri));
+				startActivity(intent);
+			}
+		});
+
+		/** 
+		 * Button click for navigating to the restaurant 
+		 * */
+		btnNav.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(v.getContext(), Nearby.class);
+				startActivity(i);
+				
+				String uri = address;
+				Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+						Uri.parse("google.navigation:q="+uri));
+				startActivity(intent);
+
+			}
+		});
 	}
 
 	/**
@@ -89,11 +134,11 @@ public class SinglePlace extends Activity {
 						// Check for all possible status
 						if(status.equals("OK")){
 							if (placeDetails.result != null) {
-								String name = placeDetails.result.name;
-								String address = placeDetails.result.formatted_address;
-								String phone = placeDetails.result.formatted_phone_number;
-								String latitude = Double.toString(placeDetails.result.geometry.location.lat);
-								String longitude = Double.toString(placeDetails.result.geometry.location.lng);
+								name = placeDetails.result.name;
+								address = placeDetails.result.formatted_address;
+								phone = placeDetails.result.formatted_phone_number;
+								latitude = Double.toString(placeDetails.result.geometry.location.lat);
+								longitude = Double.toString(placeDetails.result.geometry.location.lng);
 
 								Log.d("Place ", name + address + phone + latitude + longitude);
 

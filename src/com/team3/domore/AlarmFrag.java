@@ -53,7 +53,8 @@ public class AlarmFrag extends Fragment implements OnClickListener {
 			cal.set(Calendar.DAY_OF_MONTH, cursor.getInt(3));
 			cal.set(Calendar.YEAR, cursor.getInt(4));
 			boolean state = Boolean.parseBoolean(cursor.getString(5));
-			CalendarInfo info = new CalendarInfo(cal, state);
+			int id = cursor.getInt(6);
+			CalendarInfo info = new CalendarInfo(cal, state, id);
 			data.add(info);
 			adapter.notifyDataSetChanged();
 			cursor.moveToNext();

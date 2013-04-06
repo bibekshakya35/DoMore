@@ -77,7 +77,7 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
-	public boolean addEntry(Calendar cal) {
+	public boolean addEntry(Calendar cal, int id) {
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minute = cal.get(Calendar.MINUTE);
 		int month = cal.get(Calendar.MONTH);
@@ -85,7 +85,7 @@ public class Database {
 		int year = cal.get(Calendar.YEAR);
 		String sql = "INSERT INTO " + tableName + " VALUES ('" + hour + "' , '"
 				+ minute + "' , '" + month + "' , '" + day + "' , '" + year
-				+ "' , 'true')";
+				+ "' , 'true', " + id + ")";
 
 		String sql2 = "SELECT * FROM " + tableName + " WHERE hour = '" + hour
 				+ "' AND minute = '" + minute + "' AND month = '" + month

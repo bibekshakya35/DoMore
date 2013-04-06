@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 
 import java.text.DateFormat;
 import android.view.Menu;
@@ -43,15 +44,16 @@ public class AddAlarm extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.save_button:
+			int seed = getId();
 			Intent intent = new Intent(v.getContext(), AlarmReceiver.class);
 			intent.putExtra("alarm_message", "This is an alarm!!!");
-			PendingIntent sender = PendingIntent.getBroadcast(this, 192837,
+			PendingIntent sender = PendingIntent.getBroadcast(this, seed,
 					intent, PendingIntent.FLAG_UPDATE_CURRENT);
 			AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 			am.set(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), sender);
 
 			AlarmFrag.db.open();
-			boolean success = AlarmFrag.db.addEntry(dateTime);
+			boolean success = AlarmFrag.db.addEntry(dateTime, seed);
 			AlarmFrag.db.close();
 			if (success) {
 				this.finish();
@@ -105,4 +107,18 @@ public class AddAlarm extends Activity implements OnClickListener {
 		return true;
 	}
 
+	private int getId() {
+		int id = (int) (Math.random() * Integer.MAX_VALUE);
+		AlarmFrag.db.open();
+		Cursor cursor = AlarmFrag.db.getData();
+		while (cursor.getPosition() < cursor.getCount()) {
+			if (cursor.getInt(6) == id) {
+				cursor.moveToFirst();
+			} else {
+				cursor.moveToNext();
+			}
+		}
+		AlarmFrag.db.close();
+		return id;
+	}
 }

@@ -104,6 +104,8 @@ public class DoMoreAdapter extends BaseAdapter {
 					if (Calendar.getInstance().before(alarm.cal)) {
 						Intent intent = new Intent(v.getContext(),
 								AlarmReceiver.class);
+						intent.putExtra("alarm_message",
+								"This alarm is cancelled!");
 						PendingIntent sender = PendingIntent.getBroadcast(
 								v.getContext(), alarm.id, intent,
 								PendingIntent.FLAG_UPDATE_CURRENT);
@@ -148,6 +150,8 @@ public class DoMoreAdapter extends BaseAdapter {
 
 							Intent intent = new Intent(v.getContext(),
 									AlarmReceiver.class);
+							intent.putExtra("alarm_message",
+									"This alarm is cancelled!");
 							PendingIntent sender = PendingIntent.getBroadcast(
 									v.getContext(), alarm.id, intent,
 									PendingIntent.FLAG_UPDATE_CURRENT);

@@ -45,12 +45,15 @@ public class AddAlarm extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.save_button:
 			int seed = getId();
-			Intent intent = new Intent(v.getContext(), AlarmReceiver.class);
-			intent.putExtra("alarm_message", "This is an alarm!!!");
-			PendingIntent sender = PendingIntent.getBroadcast(this, seed,
-					intent, PendingIntent.FLAG_UPDATE_CURRENT);
-			AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-			am.set(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), sender);
+			
+			if (Calendar.getInstance().before(dateTime)) {
+				Intent intent = new Intent(v.getContext(), AlarmReceiver.class);
+				intent.putExtra("alarm_message", "This is an alarm!!!");
+				PendingIntent sender = PendingIntent.getBroadcast(this, seed,
+						intent, PendingIntent.FLAG_UPDATE_CURRENT);
+				AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+				am.set(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), sender);
+			}
 
 			AlarmFrag.db.open();
 			boolean success = AlarmFrag.db.addEntry(dateTime, seed);

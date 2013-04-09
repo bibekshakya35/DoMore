@@ -98,7 +98,7 @@ public class Database {
 			Log.w("", sql);
 			this.db.execSQL(sql);
 			return true;
-		}
+		}	
 		return false;
 	}
 

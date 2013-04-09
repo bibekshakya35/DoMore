@@ -144,8 +144,7 @@ containing a value of this type.
         public static final int btn_show_map=0x7f040012;
         public static final int date=0x7f04000d;
         public static final int dateBtn=0x7f040006;
-        public static final int delete=0x7f04001d;
-        public static final int edit=0x7f04001c;
+        public static final int delete=0x7f04001c;
         public static final int hybrid=0x7f040004;
         public static final int list=0x7f040013;
         public static final int location=0x7f040018;

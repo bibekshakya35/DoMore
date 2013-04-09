@@ -25,8 +25,7 @@ int id btn_phone 0x7f040019
 int id btn_show_map 0x7f040012
 int id date 0x7f04000d
 int id dateBtn 0x7f040006
-int id delete 0x7f04001d
-int id edit 0x7f04001c
+int id delete 0x7f04001c
 int id hybrid 0x7f040004
 int id list 0x7f040013
 int id location 0x7f040018

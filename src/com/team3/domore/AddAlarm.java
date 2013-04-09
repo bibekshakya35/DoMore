@@ -58,6 +58,10 @@ public class AddAlarm extends Activity implements OnClickListener {
 			AlarmFrag.db.open();
 			boolean success = AlarmFrag.db.addEntry(dateTime, seed);
 			AlarmFrag.db.close();
+			
+			/**
+			 * If the alarm already exists, do not try to add
+			 */
 			if (success) {
 				this.finish();
 			} else {

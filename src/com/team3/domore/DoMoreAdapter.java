@@ -134,13 +134,6 @@ public class DoMoreAdapter extends BaseAdapter {
 					public boolean onMenuItemClick(MenuItem item) {
 
 						switch (item.getItemId()) {
-						case R.id.edit:
-							Toast.makeText(
-									v.getContext(),
-									"You selected the action : "
-											+ item.getTitle(),
-									Toast.LENGTH_SHORT).show();
-							break;
 						case R.id.delete:
 							alarm = data.remove(position);
 							AlarmFrag.db.open();

@@ -37,7 +37,7 @@ public class NearbyList extends Fragment {
 	ListView lv;
 
 	// ListItems data
-	ArrayList<HashMap<String, String>> placesListItems = new ArrayList<HashMap<String,String>>();
+	ArrayList<HashMap<String, String>> placesListItems = new ArrayList<HashMap<String, String>>();
 
 	// KEY Strings
 	public static String KEY_REFERENCE = "reference"; // id of the place
@@ -64,10 +64,11 @@ public class NearbyList extends Fragment {
 		gps = new TrackGPS(getActivity());
 
 		if (gps.canGetLocation()) {
-			Log.d("Your Location", "latitude:" + gps.getLatitude() + ", longitude: " + gps.getLongitude());
+			Log.d("Your Location", "latitude:" + gps.getLatitude()
+					+ ", longitude: " + gps.getLongitude());
 		} else {
-			Toast.makeText(getActivity(), "GPS signal not found", Toast.LENGTH_LONG)
-			.show();
+			Toast.makeText(getActivity(), "GPS signal not found",
+					Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 			startActivity(intent);
 		}
@@ -81,8 +82,7 @@ public class NearbyList extends Fragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent i = new Intent(getActivity(),
-						Nearby.class);
+				Intent i = new Intent(getActivity(), Nearby.class);
 
 				// passing near places to map activity
 				i.putExtra("near_places", nearPlaces);
@@ -91,8 +91,8 @@ public class NearbyList extends Fragment {
 		});
 
 		/**
-		 * ListItem click event
-		 * On selecting a listitem SinglePlaceActivity is launched
+		 * ListItem click event On selecting a listitem SinglePlaceActivity is
+		 * launched
 		 * */
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -100,11 +100,11 @@ public class NearbyList extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// getting values from selected ListItem
-				String reference = ((TextView) view.findViewById(R.id.reference)).getText().toString();
+				String reference = ((TextView) view
+						.findViewById(R.id.reference)).getText().toString();
 
 				// Starting new intent
-				Intent in = new Intent(getActivity(),
-						SinglePlace.class);
+				Intent in = new Intent(getActivity(), SinglePlace.class);
 
 				// Sending place refrence id to single place activity
 				// place refrence id used to get "Place full details"
@@ -126,7 +126,8 @@ public class NearbyList extends Fragment {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(getActivity());
-			pDialog.setMessage(Html.fromHtml("<b>Search</b><br/>Loading Places..."));
+			pDialog.setMessage(Html
+					.fromHtml("<b>Search</b><br/>Loading Places..."));
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(false);
 			pDialog.show();
@@ -141,7 +142,7 @@ public class NearbyList extends Fragment {
 
 			try {
 				String types = "restaurant|cafe";
-				int radius = 1000; 
+				int radius = 1000;
 				nearPlaces = googlePlaces.search(gps.getLatitude(),
 						gps.getLongitude(), radius, types);
 
@@ -152,10 +153,9 @@ public class NearbyList extends Fragment {
 		}
 
 		/**
-		 * After completing background task Dismiss the progress dialog
-		 * and show the data in UI
-		 * Always use runOnUiThread(new Runnable()) to update UI from background
-		 * thread, otherwise you will get error
+		 * After completing background task Dismiss the progress dialog and show
+		 * the data in UI Always use runOnUiThread(new Runnable()) to update UI
+		 * from background thread, otherwise you will get error
 		 * **/
 		protected void onPostExecute(String file_url) {
 
@@ -168,14 +168,15 @@ public class NearbyList extends Fragment {
 			String status = nearPlaces.status;
 
 			// Check for all possible status
-			if(status.equals("OK")){
+			if (status.equals("OK")) {
 				// Successfully got places details
 				if (nearPlaces.results != null) {
 					// loop through each place
 					for (Place p : nearPlaces.results) {
 						HashMap<String, String> map = new HashMap<String, String>();
 
-						// Place reference won't display in listview - it will be hidden
+						// Place reference won't display in listview - it will
+						// be hidden
 						// Place reference is used to get "place full details"
 						map.put(KEY_REFERENCE, p.reference);
 
@@ -186,36 +187,25 @@ public class NearbyList extends Fragment {
 						placesListItems.add(map);
 					}
 					// list adapter
-					ListAdapter adapter = new SimpleAdapter(getActivity(), placesListItems,
-							R.layout.nearby_row,
-							new String[] { KEY_REFERENCE, KEY_NAME}, new int[] {
-						R.id.reference, R.id.name });
+					ListAdapter adapter = new SimpleAdapter(getActivity(),
+							placesListItems, R.layout.nearby_row, new String[] {
+									KEY_REFERENCE, KEY_NAME }, new int[] {
+									R.id.reference, R.id.name });
 
 					// Adding data into listview
 					lv.setAdapter(adapter);
 				}
-			}
-			else if(status.equals("ZERO_RESULTS")){
+			} else if (status.equals("ZERO_RESULTS")) {
 				// Zero results found
-			}
-			else if(status.equals("UNKNOWN_ERROR"))
-			{
+			} else if (status.equals("UNKNOWN_ERROR")) {
 
-			}
-			else if(status.equals("OVER_QUERY_LIMIT"))
-			{
+			} else if (status.equals("OVER_QUERY_LIMIT")) {
 
-			}
-			else if(status.equals("REQUEST_DENIED"))
-			{
+			} else if (status.equals("REQUEST_DENIED")) {
 
-			}
-			else if(status.equals("INVALID_REQUEST"))
-			{
+			} else if (status.equals("INVALID_REQUEST")) {
 
-			}
-			else
-			{
+			} else {
 
 			}
 		}

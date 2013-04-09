@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class NearbyList extends Fragment {
 
@@ -57,6 +59,17 @@ public class NearbyList extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+
+		LocationManager service = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+		boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+		if (!enabledWiFi) {
+			Toast.makeText(getActivity(), "Data connection not found", Toast.LENGTH_LONG)
+			.show();
+			Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+			Log.w("","Banana");
+			startActivity(intent);
+		}
 
 		placesListItems.clear();
 		lv = (ListView) getView().findViewById(R.id.list);

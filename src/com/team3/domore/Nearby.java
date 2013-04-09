@@ -41,6 +41,13 @@ public class Nearby extends FragmentActivity {
 			startActivity(intent);
 		}
 
+		if (!enabledWiFi) {
+			Toast.makeText(this, "Data connection not found", Toast.LENGTH_LONG)
+			.show();
+			Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+			startActivity(intent);
+		}
+		
 		map.setMyLocationEnabled(true);
 		map.getMyLocation();
 		

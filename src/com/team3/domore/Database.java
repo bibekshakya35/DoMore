@@ -28,6 +28,9 @@ public class Database {
 		this.dbHelper = new myDBHelper(context, databaseName, null, 1);
 	}
 
+	/*
+	 * Create a database
+	 */
 	public Database createDatabase() throws SQLException {
 		try {
 			this.dbHelper.createDataBase();
@@ -37,6 +40,9 @@ public class Database {
 		return this;
 	}
 
+	/*
+	 * Open a database
+	 */
 	public Database open() throws SQLException {
 		try {
 			this.dbHelper.openDataBase();
@@ -48,10 +54,16 @@ public class Database {
 		return this;
 	}
 
+	/*
+	 * Close a database
+	 */
 	public void close() {
 		this.dbHelper.close();
 	}
 
+	/*
+	 * Get rows in the database
+	 */
 	public Cursor getData() {
 		try {
 			String sql = "SELECT * FROM " + tableName;
@@ -66,6 +78,9 @@ public class Database {
 		}
 	}
 
+	/*
+	 * Update an entry
+	 */
 	public void update(Calendar cal, boolean newState) {
 		String sql = "UPDATE " + tableName + " SET state = '" + newState
 				+ "' WHERE hour = '" + cal.get(Calendar.HOUR_OF_DAY)
@@ -77,6 +92,9 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
+	/*
+	 * Add a new entry
+	 */
 	public boolean addEntry(Calendar cal, int id) {
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minute = cal.get(Calendar.MINUTE);
@@ -98,10 +116,13 @@ public class Database {
 			Log.w("", sql);
 			this.db.execSQL(sql);
 			return true;
-		}	
+		}
 		return false;
 	}
 
+	/*
+	 * Delete an entry
+	 */
 	public void deleteEntry(Calendar cal) {
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minute = cal.get(Calendar.MINUTE);
@@ -115,23 +136,9 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
-	public Cursor search(String key) {
-		try {
-			String sql = "SELECT * FROM " + tableName + " WHERE _id LIKE '%"
-					+ key + "%' OR address LIKE '%" + key + "%' OR tel LIKE '%"
-					+ key + "%' OR intro LIKE '%" + key + "%'";
-
-			Cursor cursor = this.db.rawQuery(sql, null);
-
-			if (cursor != null) {
-				cursor.moveToNext();
-			}
-			return cursor;
-		} catch (SQLException e) {
-			throw e;
-		}
-	}
-
+	/*
+	 * Helper class
+	 */
 	private class myDBHelper extends SQLiteOpenHelper {
 		private String DB_PATH = "";
 		private SQLiteDatabase mDataBase;
@@ -145,6 +152,9 @@ public class Database {
 			this.context = context;
 		}
 
+		/*
+		 * Create a database
+		 */
 		private void createDataBase() throws IOException {
 			if (!checkDataBase()) {
 				this.getReadableDatabase();
@@ -157,11 +167,17 @@ public class Database {
 			}
 		}
 
+		/*
+		 * Check if a database exists
+		 */
 		private boolean checkDataBase() {
 			File dbFile = new File(DB_PATH + databaseName);
 			return dbFile.exists();
 		}
 
+		/*
+		 * Copy a database
+		 */
 		private void copyDataBase() throws IOException {
 			InputStream mInput = this.context.getAssets().open(databaseName);
 			String outFileName = this.DB_PATH + databaseName;
@@ -176,6 +192,9 @@ public class Database {
 			mInput.close();
 		}
 
+		/*
+		 * Open a database
+		 */
 		private boolean openDataBase() throws SQLException {
 			String mPath = this.DB_PATH + databaseName;
 
@@ -184,6 +203,9 @@ public class Database {
 			return this.mDataBase != null;
 		}
 
+		/*
+		 * Close the database
+		 */
 		@Override
 		public synchronized void close() {
 			if (this.mDataBase != null)

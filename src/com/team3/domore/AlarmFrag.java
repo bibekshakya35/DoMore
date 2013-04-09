@@ -19,7 +19,7 @@ public class AlarmFrag extends Fragment implements OnClickListener {
 	public static DoMoreAdapter adapter;
 	public static Database db;
 	public ListView list;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class AlarmFrag extends Fragment implements OnClickListener {
 	@Override
 	public void onStart() {
 		super.onStart();
-		
+
 		View btnAdd = (Button) getView().findViewById(R.id.add_button);
 		btnAdd.setOnClickListener(this);
 
@@ -40,11 +40,13 @@ public class AlarmFrag extends Fragment implements OnClickListener {
 
 		list.setAdapter(adapter);
 
+		// open the database and get rows
 		db = new Database(getActivity(), "ALARMS.sqlite", "ALARM_TABLE");
 		db.createDatabase();
 		db.open();
 		Cursor cursor = db.getData();
 
+		// traverse through rows and populate a list of calendars
 		while (cursor.getPosition() < cursor.getCount()) {
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.HOUR_OF_DAY, cursor.getInt(0));

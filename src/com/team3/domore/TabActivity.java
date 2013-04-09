@@ -24,6 +24,7 @@ public class TabActivity extends FragmentActivity {
 
 		mTabManager = new TabManager(this, mTabHost, android.R.id.tabcontent);
 
+		// two tabs
 		mTabManager.addTab(
 				mTabHost.newTabSpec("nearby").setIndicator("Nearby"),
 				NearbyList.class, null);
@@ -42,6 +43,7 @@ public class TabActivity extends FragmentActivity {
 		outState.putString("tab", mTabHost.getCurrentTabTag());
 	}
 
+	// Pattern
 	public static class TabManager implements TabHost.OnTabChangeListener {
 		private final FragmentActivity mActivity;
 		private final TabHost mTabHost;

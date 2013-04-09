@@ -45,6 +45,9 @@ public class DoMoreAdapter extends BaseAdapter {
 		return position;
 	}
 
+	/*
+	 * Called to populate each row of a list
+	 */
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 		if (convertView == null) {
@@ -68,7 +71,7 @@ public class DoMoreAdapter extends BaseAdapter {
 			onOff.setChecked(false);
 		}
 
-		/**
+		/*
 		 * Button to toggle the alarm on or off
 		 */
 		onOff.setOnClickListener(new OnClickListener() {
@@ -118,7 +121,7 @@ public class DoMoreAdapter extends BaseAdapter {
 			}
 		});
 
-		/**
+		/*
 		 * Add on long click listener for each item to with option to delete
 		 */
 		time.setOnLongClickListener(new OnLongClickListener() {

@@ -2,6 +2,9 @@ package com.team3.domore;
 
 import java.util.Calendar;
 
+/*
+ * Info about an alarm
+ */
 public class CalendarInfo {
 	public Calendar cal;
 	public boolean state;

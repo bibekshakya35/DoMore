@@ -25,11 +25,11 @@ public class TabActivity extends FragmentActivity {
 		mTabManager = new TabManager(this, mTabHost, android.R.id.tabcontent);
 
 		mTabManager.addTab(
-				mTabHost.newTabSpec("alarms").setIndicator("Alarms"),
-				AlarmFrag.class, null);
-		mTabManager.addTab(
 				mTabHost.newTabSpec("nearby").setIndicator("Nearby"),
 				NearbyList.class, null);
+		mTabManager.addTab(
+				mTabHost.newTabSpec("alarms").setIndicator("Alarms"),
+				AlarmFrag.class, null);
 
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));

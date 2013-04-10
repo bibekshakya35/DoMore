@@ -20,23 +20,15 @@ public class AlarmReceiver extends BroadcastReceiver {
 			String message = bundle.getString("alarm_message");
 			Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 			
-			/**
-			 *  Create the intent to launch when "nearby" button is clicked
-			 */
+			// Create an intent to launch NearbyList
 			PendingIntent nearbyIntent;
 	        Intent i = new Intent(context, TabActivity.class);
 	        nearbyIntent =  PendingIntent.getActivity(context, 0, i, 0);
-			
-	        PendingIntent deleteIntent;
-	        Intent i2 = new Intent(context, TabActivity.class);
-	        deleteIntent =  PendingIntent.getActivity(context, 1, i2, 0);
 	        
 			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 			Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-			/** 
-			 * Build the notification for the alarm
-			 */
+			// Build the notification for the alarm
 			Notification noti = new NotificationCompat.Builder(context)
 	         .setContentTitle("Food Time!")
 	         .setContentText("Hungry? Check out some suggestions")
@@ -44,13 +36,12 @@ public class AlarmReceiver extends BroadcastReceiver {
 	         .setSound(uri)
 	         .setWhen(System.currentTimeMillis())
 	         .addAction(R.drawable.location, "Nearby", nearbyIntent)
-	         .addAction(R.drawable.trash, "Delete", deleteIntent)
 	         .build();
 			
 	        nm.notify(192837, noti);
 			
 		} catch (Exception e) {
-			Toast.makeText(context, "There was an error somewhere, but alarm was received", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "There was an error, but alarm was received", Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 	}

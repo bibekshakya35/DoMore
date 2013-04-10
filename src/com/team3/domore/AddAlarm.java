@@ -40,6 +40,11 @@ public class AddAlarm extends Activity implements OnClickListener {
 		updateLabel();
 	}
 
+	/**
+	 * When the save button is clicked, add an alarm to the
+	 * alarm manager. When the alarm goes off, AlarmReceiver
+	 * is called.
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -60,9 +65,7 @@ public class AddAlarm extends Activity implements OnClickListener {
 			boolean success = AlarmFrag.db.addEntry(dateTime, seed);
 			AlarmFrag.db.close();
 
-			/**
-			 * If the alarm already exists, do not try to add
-			 */
+			// If the alarm exists, do not add
 			if (success) {
 				this.finish();
 			} else {
@@ -72,12 +75,14 @@ public class AddAlarm extends Activity implements OnClickListener {
 		}
 	}
 
+	// Date popup dialog
 	public void chooseDate(View v) {
 		new DatePickerDialog(AddAlarm.this, d, dateTime.get(Calendar.YEAR),
 				dateTime.get(Calendar.MONTH),
 				dateTime.get(Calendar.DAY_OF_MONTH)).show();
 	}
 
+	// Time popup dialog
 	public void chooseTime(View v) {
 		new TimePickerDialog(AddAlarm.this, t,
 				dateTime.get(Calendar.HOUR_OF_DAY),
@@ -108,13 +113,9 @@ public class AddAlarm extends Activity implements OnClickListener {
 		timeLabel.setText(formatDateTime.format(dateTime.getTime()));
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_alarm, menu);
-		return true;
-	}
-
+	/**
+	 * Unique id for each alarm that allows for identification
+	 */
 	private int getId() {
 		int id = (int) (Math.random() * Integer.MAX_VALUE);
 		AlarmFrag.db.open();

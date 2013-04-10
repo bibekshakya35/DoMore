@@ -34,17 +34,18 @@ public class NearbyList extends Fragment {
 	Button btnShowOnMap;
 	ProgressDialog pDialog;
 
-	// Places List
 	PlacesList nearPlaces;
 	ListView lv;
-
-	// ListItems data
 	ArrayList<HashMap<String, String>> placesListItems = new ArrayList<HashMap<String, String>>();
 
-	// KEY Strings
-	public static String KEY_REFERENCE = "reference"; // id of the place
-	public static String KEY_NAME = "name"; // name of the place
-	public static String KEY_VICINITY = "vicinity"; // Place area name
+	// ID of place
+	public static String KEY_REFERENCE = "reference";
+	
+	// Name of the place
+	public static String KEY_NAME = "name";
+	
+	// Area of the place (address)
+	public static String KEY_VICINITY = "vicinity"; 
 
 	public static LocationManager lm;
 	public static double longitude;
@@ -86,7 +87,7 @@ public class NearbyList extends Fragment {
 			startActivity(intent);
 		}
 
-		// calling background Async task to load Google Places
+		// Calling background Async task to load Google Places
 		// After getting places from Google all the data is shown in listview
 		new LoadPlaces().execute();
 
@@ -97,14 +98,14 @@ public class NearbyList extends Fragment {
 			public void onClick(View arg0) {
 				Intent i = new Intent(getActivity(), Nearby.class);
 
-				// passing near places to map activity
+				// Pass places to map activity
 				i.putExtra("near_places", nearPlaces);
 				startActivity(i);
 			}
 		});
 
 		/**
-		 * ListItem click event On selecting a listitem SinglePlaceActivity is
+		 * ListItem click event On selecting a listitem SinglePlace is
 		 * launched
 		 * */
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -112,15 +113,15 @@ public class NearbyList extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// getting values from selected ListItem
+				
+				// Getting values from selected ListItem
 				String reference = ((TextView) view
 						.findViewById(R.id.reference)).getText().toString();
 
 				// Starting new intent
 				Intent in = new Intent(getActivity(), SinglePlace.class);
 
-				// Sending place refrence id to single place activity
-				// place refrence id used to get "Place full details"
+				// Sending place reference id to single place activity
 				in.putExtra(KEY_REFERENCE, reference);
 				startActivity(in);
 			}
@@ -128,12 +129,12 @@ public class NearbyList extends Fragment {
 	}
 
 	/**
-	 * Background Async Task to Load Google places
+	 * Background Async Task to load Google places
 	 * */
 	class LoadPlaces extends AsyncTask<String, String, String> {
 
 		/**
-		 * Before starting background thread Show Progress Dialog
+		 * Before starting background thread show ProgressDialog
 		 * */
 		@Override
 		protected void onPreExecute() {
@@ -147,7 +148,7 @@ public class NearbyList extends Fragment {
 		}
 
 		/**
-		 * getting Places JSON
+		 * Get all Places as JSON file
 		 * */
 		protected String doInBackground(String... args) {
 
@@ -166,40 +167,38 @@ public class NearbyList extends Fragment {
 		}
 
 		/**
-		 * After completing background task Dismiss the progress dialog and show
-		 * the data in UI Always use runOnUiThread(new Runnable()) to update UI
-		 * from background thread, otherwise you will get error
+		 * After completing background task dismiss the progress dialog and show
+		 * the data 
 		 * **/
 		protected void onPostExecute(String file_url) {
 
 			pDialog.dismiss();
 
 			/**
-			 * Updating parsed Places into LISTVIEW
+			 * Updating parsed places into listview
 			 * */
 			// Get json response status
 			String status = nearPlaces.status;
 
 			// Check for all possible status
 			if (status.equals("OK")) {
+				
 				// Successfully got places details
 				if (nearPlaces.results != null) {
+					
 					// loop through each place
 					for (Place p : nearPlaces.results) {
 						HashMap<String, String> map = new HashMap<String, String>();
 
-						// Place reference won't display in listview - it will
-						// be hidden
-						// Place reference is used to get "place full details"
+						// Place reference is used to get details (not displayed in list)
 						map.put(KEY_REFERENCE, p.reference);
 
 						// Place name
 						map.put(KEY_NAME, p.name);
 
-						// adding HashMap to ArrayList
+						// add HashMap to ArrayList
 						placesListItems.add(map);
 					}
-					// list adapter
 					ListAdapter adapter = new SimpleAdapter(getActivity(),
 							placesListItems, R.layout.nearby_row, new String[] {
 									KEY_REFERENCE, KEY_NAME }, new int[] {
@@ -209,17 +208,28 @@ public class NearbyList extends Fragment {
 					lv.setAdapter(adapter);
 				}
 			} else if (status.equals("ZERO_RESULTS")) {
-				// Zero results found
-			} else if (status.equals("UNKNOWN_ERROR")) {
-
-			} else if (status.equals("OVER_QUERY_LIMIT")) {
-
-			} else if (status.equals("REQUEST_DENIED")) {
-
-			} else if (status.equals("INVALID_REQUEST")) {
-
-			} else {
-
+				Toast.makeText(getActivity(), "No restaurants found", Toast.LENGTH_LONG)
+				.show();
+			} 
+			else if (status.equals("UNKNOWN_ERROR")) {
+				Toast.makeText(getActivity(), "Error retrieving list", Toast.LENGTH_LONG)
+				.show();
+			} 
+			else if (status.equals("OVER_QUERY_LIMIT")) {
+				Toast.makeText(getActivity(), "Too many requests, try later", Toast.LENGTH_LONG)
+				.show();
+			} 
+			else if (status.equals("REQUEST_DENIED")) {
+				Toast.makeText(getActivity(), "Error retrieving list", Toast.LENGTH_LONG)
+				.show();
+			} 
+			else if (status.equals("INVALID_REQUEST")) {
+				Toast.makeText(getActivity(), "Error retrieving list", Toast.LENGTH_LONG)
+				.show();
+			} 
+			else {
+				Toast.makeText(getActivity(), "Error retrieving list", Toast.LENGTH_LONG)
+				.show();
 			}
 		}
 

@@ -25,15 +25,18 @@ public class Nearby extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nearby);
 
+		// Get places from NearbyList
 		Intent i = getIntent();
 		PlacesList nearPlaces = (PlacesList) i.getSerializableExtra("near_places");
 		
 		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview)).getMap();
 
+		// Check for a data connection and GPS
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		boolean enabledGPS = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
 		boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
+		// If not enabled, transfer to settings
 		if (!enabledGPS) {
 			Toast.makeText(this, "GPS signal not found", Toast.LENGTH_LONG)
 			.show();
@@ -53,9 +56,7 @@ public class Nearby extends FragmentActivity {
 		
 		TrackGPS gps = new TrackGPS(this);
 		
-		/**
-		 * Display red marker for user location
-		 */
+		// Display a red marker at user's position
 		LatLng myLoc = new LatLng(gps.getLatitude(), gps.getLongitude());
 		map.addMarker(new MarkerOptions()
 		.position(myLoc)
@@ -65,9 +66,7 @@ public class Nearby extends FragmentActivity {
 		map.getUiSettings().setZoomControlsEnabled(true);
 		map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLoc, 14));
 		
-		/**
-		 * Display blue marker for each place
-		 */
+		// Display a blue marker for each place
 		for (Place p : nearPlaces.results) {
 			LatLng placeLoc = new LatLng(p.geometry.location.lat, p.geometry.location.lng);	
 			map.addMarker(new MarkerOptions()

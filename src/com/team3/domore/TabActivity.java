@@ -2,11 +2,19 @@ package com.team3.domore;
 
 import java.util.HashMap;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
 
@@ -21,20 +29,60 @@ public class TabActivity extends FragmentActivity {
 		setContentView(R.layout.tabs);
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup();
-
+		
 		mTabManager = new TabManager(this, mTabHost, android.R.id.tabcontent);
 
-		// two tabs
-		mTabManager.addTab(
-				mTabHost.newTabSpec("nearby").setIndicator("Nearby"),
-				NearbyList.class, null);
+		// Tab for alarms and nearby places
 		mTabManager.addTab(
 				mTabHost.newTabSpec("alarms").setIndicator("Alarms"),
 				AlarmFrag.class, null);
+		mTabManager.addTab(
+				mTabHost.newTabSpec("nearby").setIndicator("Nearby"),
+				NearbyList.class, null);
 
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
 		}
+		
+		// Create a check to see if this is the first time running the app
+		SharedPreferences prefs = getSharedPreferences("FirstLaunch", MODE_PRIVATE);
+	    PackageInfo pInfo;
+	    try {
+	        pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+	        if (prefs.getLong("lastRunVersionCode", 0) < pInfo.versionCode) {
+	        	
+	        	AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+	    		alertDialog.setTitle("First Launch");
+	    		alertDialog.setMessage("It appears this is your first time using Eat More. Would you like to see how to use this app?");
+	            
+	    		// On pressing "Yeah!" button
+	    		alertDialog.setPositiveButton("Yeah!",
+	    				new DialogInterface.OnClickListener() {
+	    			public void onClick(DialogInterface dialog, int which) {
+	    				// Go to the about activity
+	    				Intent intent = new Intent(TabActivity.this, About.class);
+	    				startActivity(intent);
+	    			}
+	    		});
+
+	    		// On pressing "No Thanks" button
+	    		alertDialog.setNegativeButton("No Thanks",
+	    				new DialogInterface.OnClickListener() {
+	    			public void onClick(DialogInterface dialog, int which) {
+	    				// Dismiss the dialog
+	    				dialog.cancel();
+	    			}
+	    		});
+	    		
+	    		alertDialog.show();
+	    		SharedPreferences.Editor editor = prefs.edit();
+	            editor.putLong("lastRunVersionCode", pInfo.versionCode);
+	            editor.commit();
+	        }
+	    } catch (PackageManager.NameNotFoundException e) {
+	        Log.e("Version Check", "Error reading versionCode");
+	        e.printStackTrace();
+	    }
 	}
 
 	@Override
@@ -43,7 +91,6 @@ public class TabActivity extends FragmentActivity {
 		outState.putString("tab", mTabHost.getCurrentTabTag());
 	}
 
-	// Pattern
 	public static class TabManager implements TabHost.OnTabChangeListener {
 		private final FragmentActivity mActivity;
 		private final TabHost mTabHost;

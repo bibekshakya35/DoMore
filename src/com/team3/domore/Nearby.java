@@ -6,14 +6,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
 import android.widget.Toast;
 
 public class Nearby extends FragmentActivity {
@@ -35,13 +32,12 @@ public class Nearby extends FragmentActivity {
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		boolean enabledGPS = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
 		boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		
+		TrackGPS gps = new TrackGPS(this);
 
 		// If not enabled, transfer to settings
 		if (!enabledGPS) {
-			Toast.makeText(this, "GPS signal not found", Toast.LENGTH_LONG)
-			.show();
-			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-			startActivity(intent);
+			gps.showSettingsAlert();
 		}
 
 		if (!enabledWiFi) {
@@ -53,8 +49,6 @@ public class Nearby extends FragmentActivity {
 		
 		map.setMyLocationEnabled(true);
 		map.getMyLocation();
-		
-		TrackGPS gps = new TrackGPS(this);
 		
 		// Display a red marker at user's position
 		LatLng myLoc = new LatLng(gps.getLatitude(), gps.getLongitude());

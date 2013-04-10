@@ -27,17 +27,15 @@ import android.widget.Toast;
 
 
 public class NearbyList extends Fragment {
-
 	Boolean isInternetPresent = false;
 	TrackGPS gps;
 	GooglePlaces googlePlaces;
 	Button btnShowOnMap;
 	ProgressDialog pDialog;
-
 	PlacesList nearPlaces;
 	ListView lv;
 	ArrayList<HashMap<String, String>> placesListItems = new ArrayList<HashMap<String, String>>();
-
+	
 	// ID of place
 	public static String KEY_REFERENCE = "reference";
 	
@@ -46,10 +44,6 @@ public class NearbyList extends Fragment {
 	
 	// Area of the place (address)
 	public static String KEY_VICINITY = "vicinity"; 
-
-	public static LocationManager lm;
-	public static double longitude;
-	public static double latitude;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +62,6 @@ public class NearbyList extends Fragment {
 			Toast.makeText(getActivity(), "Data connection not found", Toast.LENGTH_LONG)
 			.show();
 			Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-			Log.w("","Banana");
 			startActivity(intent);
 		}
 
@@ -77,14 +70,13 @@ public class NearbyList extends Fragment {
 		btnShowOnMap = (Button) getView().findViewById(R.id.btn_show_map);
 		gps = new TrackGPS(getActivity());
 
+		// If it is possible to get location
 		if (gps.canGetLocation()) {
 			Log.d("Your Location", "latitude:" + gps.getLatitude()
 					+ ", longitude: " + gps.getLongitude());
-		} else {
-			Toast.makeText(getActivity(), "GPS signal not found",
-					Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-			startActivity(intent);
+		} 
+		else {
+			gps.showSettingsAlert();
 		}
 
 		// Calling background Async task to load Google Places
@@ -177,7 +169,7 @@ public class NearbyList extends Fragment {
 			/**
 			 * Updating parsed places into listview
 			 * */
-			// Get json response status
+			// Get JSON response status
 			String status = nearPlaces.status;
 
 			// Check for all possible status
@@ -207,7 +199,9 @@ public class NearbyList extends Fragment {
 					// Adding data into listview
 					lv.setAdapter(adapter);
 				}
-			} else if (status.equals("ZERO_RESULTS")) {
+			} 
+			// If status does not return results
+			else if (status.equals("ZERO_RESULTS")) {
 				Toast.makeText(getActivity(), "No restaurants found", Toast.LENGTH_LONG)
 				.show();
 			} 

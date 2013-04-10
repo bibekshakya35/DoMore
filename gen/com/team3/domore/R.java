@@ -163,22 +163,24 @@ containing a value of this type.
         public static final int timeTxt=0x7f040005;
     }
     public static final class layout {
-        public static final int add_alarm=0x7f030000;
-        public static final int alarm_frag=0x7f030001;
-        public static final int alarm_row=0x7f030002;
-        public static final int nearby=0x7f030003;
-        public static final int nearby_list=0x7f030004;
-        public static final int nearby_row=0x7f030005;
-        public static final int single_place=0x7f030006;
-        public static final int tabs=0x7f030007;
+        public static final int about=0x7f030000;
+        public static final int add_alarm=0x7f030001;
+        public static final int alarm_frag=0x7f030002;
+        public static final int alarm_row=0x7f030003;
+        public static final int nearby=0x7f030004;
+        public static final int nearby_list=0x7f030005;
+        public static final int nearby_row=0x7f030006;
+        public static final int single_place=0x7f030007;
+        public static final int tabs=0x7f030008;
     }
     public static final class menu {
-        public static final int activity_single_place=0x7f070000;
-        public static final int add_alarm=0x7f070001;
-        public static final int alarm=0x7f070002;
-        public static final int alarm_popup=0x7f070003;
-        public static final int nearby=0x7f070004;
-        public static final int nearby_list=0x7f070005;
+        public static final int about=0x7f070000;
+        public static final int activity_single_place=0x7f070001;
+        public static final int add_alarm=0x7f070002;
+        public static final int alarm=0x7f070003;
+        public static final int alarm_popup=0x7f070004;
+        public static final int nearby=0x7f070005;
+        public static final int nearby_list=0x7f070006;
     }
     public static final class string {
         public static final int app_name=0x7f050011;
@@ -244,11 +246,12 @@ containing a value of this type.
         find the service-side assets. [CHAR LIMIT=25] 
          */
         public static final int common_signin_button_text_long=0x7f05000d;
-        public static final int day_text=0x7f050015;
-        public static final int hello_world=0x7f050012;
-        public static final int menu_settings=0x7f050013;
-        public static final int month_text=0x7f050014;
-        public static final int title_activity_single_place=0x7f050016;
+        public static final int day_text=0x7f050014;
+        public static final int info_alarms=0x7f050016;
+        public static final int info_general=0x7f050015;
+        public static final int info_nearby=0x7f050017;
+        public static final int menu_settings=0x7f050012;
+        public static final int month_text=0x7f050013;
     }
     public static final class style {
         /** 

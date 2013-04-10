@@ -2,10 +2,21 @@
 <resources>
 
     <string name="app_name">Eat More</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="month_text">Month</string>
     <string name="day_text">Day</string>
-    <string name="title_activity_single_place">SinglePlace</string>
-
+	<string name="info_general">Welcome to Eat More! This app is designed to make 
+	    it easier for people around the world to get suggestions of restaurants near them.
+	    Now, you may ask, how is this different from other apps? Well, the idea behind our design is
+	    to make the experience as simple as possible without detracting from user experience.
+	    In addition, it offers an alarm system that is not seen in any other suggestion-based app.</string>
+    <string name="info_alarms">Imagine you have a business meeting in two days. You don\'t know the area
+        very well and there is way too much on your mind for you to be thinking about lunch that day. Well,
+        our alarm system allows for users to set a specific time and day that
+        they want to receive a restaurant suggestion. When this time comes, the user receives a notification with 
+        an option to view nearby places.</string>
+	<string name="info_nearby">If not selected from the notification menu, the user may also choose
+	    to view nearby places from inside the app. They appear as a list where each item may be
+	    selected to view detailed information. There is also an option to view these places on
+	    a map to see where they are in relation to you.</string>
 </resources>

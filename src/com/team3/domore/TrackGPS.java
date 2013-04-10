@@ -95,17 +95,14 @@ public class TrackGPS extends Service implements LocationListener {
 					}
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return location;
 	}
 
 	/**
-	 * Stop using GPS listener Calling this function will stop using GPS in your
-	 * app
+	 * Stops the use of GPS
 	 * */
 	public void stopUsingGPS() {
 		if (locationManager != null) {
@@ -146,11 +143,11 @@ public class TrackGPS extends Service implements LocationListener {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
 		// Setting Dialog Title
-		alertDialog.setTitle("GPS is settings");
+		alertDialog.setTitle("GPS is disabled");
 
 		// Setting Dialog Message
 		alertDialog
-		.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+		.setMessage("GPS makes your location more accurate. Do you want to go to the settings menu?");
 
 		// On pressing Settings button
 		alertDialog.setPositiveButton("Settings",

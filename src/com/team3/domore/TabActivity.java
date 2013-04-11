@@ -34,11 +34,11 @@ public class TabActivity extends FragmentActivity {
 
 		// Tab for alarms and nearby places
 		mTabManager.addTab(
-				mTabHost.newTabSpec("alarms").setIndicator("Alarms"),
-				AlarmFrag.class, null);
-		mTabManager.addTab(
 				mTabHost.newTabSpec("nearby").setIndicator("Nearby"),
 				NearbyList.class, null);
+		mTabManager.addTab(
+				mTabHost.newTabSpec("alarms").setIndicator("Alarms"),
+				AlarmFrag.class, null);
 
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));

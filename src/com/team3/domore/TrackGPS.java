@@ -139,7 +139,7 @@ public class TrackGPS extends Service implements LocationListener {
 	 * Function to show settings alert dialog On pressing Settings button will
 	 * lauch Settings Options
 	 * */
-	public void showSettingsAlert() {
+	public void showGpsSettingsAlert() {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
 		// Setting Dialog Title
@@ -171,6 +171,38 @@ public class TrackGPS extends Service implements LocationListener {
 		alertDialog.show();
 	}
 
+	public void showWifiSettingsAlert() {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+
+		// Setting Dialog Title
+		alertDialog.setTitle("No data connection");
+
+		// Setting Dialog Message
+		alertDialog
+		.setMessage("There is no data connection to retrieve suggestions. Do you want to connect to wifi?");
+
+		// On pressing Settings button
+		alertDialog.setPositiveButton("Settings",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(
+						Settings.ACTION_WIFI_SETTINGS);
+				mContext.startActivity(intent);
+			}
+		});
+
+		// on pressing cancel button
+		alertDialog.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+
+		// Showing Alert Message
+		alertDialog.show();
+	}
+	
 	@Override
 	public void onLocationChanged(Location location) {
 	}

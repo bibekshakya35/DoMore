@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class Nearby extends FragmentActivity {
 
 	private GoogleMap map;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,32 +24,24 @@ public class Nearby extends FragmentActivity {
 
 		// Get places from NearbyList
 		Intent i = getIntent();
-		PlacesList nearPlaces = (PlacesList) i.getSerializableExtra("near_places");
-		
-		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview)).getMap();
+		PlacesList nearPlaces = new PlacesList();
 
+		nearPlaces = (PlacesList) i.getSerializableExtra("near_places");
+		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview)).getMap();
+		
+		TrackGPS gps = new TrackGPS(this);
 		// Check for a data connection and GPS
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		boolean enabledGPS = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		
-		TrackGPS gps = new TrackGPS(this);
 
 		// If not enabled, transfer to settings
 		if (!enabledGPS) {
-			gps.showSettingsAlert();
+			gps.showGpsSettingsAlert();
 		}
 
-		if (!enabledWiFi) {
-			Toast.makeText(this, "Data connection not found", Toast.LENGTH_LONG)
-			.show();
-			Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-			startActivity(intent);
-		}
-		
 		map.setMyLocationEnabled(true);
 		map.getMyLocation();
-		
+
 		// Display a red marker at user's position
 		LatLng myLoc = new LatLng(gps.getLatitude(), gps.getLongitude());
 		map.addMarker(new MarkerOptions()
@@ -59,15 +51,22 @@ public class Nearby extends FragmentActivity {
 		map.getUiSettings().setCompassEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(true);
 		map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLoc, 14));
-		
+
 		// Display a blue marker for each place
-		for (Place p : nearPlaces.results) {
-			LatLng placeLoc = new LatLng(p.geometry.location.lat, p.geometry.location.lng);	
-			map.addMarker(new MarkerOptions()
-			.position(placeLoc)
-			.title(p.name)
-			.snippet(p.vicinity)
-			.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+		try {
+			for (Place p : nearPlaces.results) {
+				LatLng placeLoc = new LatLng(p.geometry.location.lat, p.geometry.location.lng);	
+				map.addMarker(new MarkerOptions()
+				.position(placeLoc)
+				.title(p.name)
+				.snippet(p.vicinity)
+				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+			}
+		}
+		catch (Exception e){
+			Toast.makeText(this, "No Data Connection", Toast.LENGTH_LONG)
+			.show();
+			gps.showWifiSettingsAlert();
 		}
 	}
 }

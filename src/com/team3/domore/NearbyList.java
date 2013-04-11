@@ -35,13 +35,13 @@ public class NearbyList extends Fragment {
 	PlacesList nearPlaces;
 	ListView lv;
 	ArrayList<HashMap<String, String>> placesListItems = new ArrayList<HashMap<String, String>>();
-	
+
 	// ID of place
 	public static String KEY_REFERENCE = "reference";
-	
+
 	// Name of the place
 	public static String KEY_NAME = "name";
-	
+
 	// Area of the place (address)
 	public static String KEY_VICINITY = "vicinity"; 
 
@@ -55,29 +55,20 @@ public class NearbyList extends Fragment {
 	public void onStart() {
 		super.onStart();
 
-		LocationManager service = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-		boolean enabledWiFi = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
-		if (!enabledWiFi) {
-			Toast.makeText(getActivity(), "Data connection not found", Toast.LENGTH_LONG)
-			.show();
-			Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-			startActivity(intent);
-		}
-
-		placesListItems.clear();
-		lv = (ListView) getView().findViewById(R.id.list);
-		btnShowOnMap = (Button) getView().findViewById(R.id.btn_show_map);
-		gps = new TrackGPS(getActivity());
-
 		// If it is possible to get location
+		gps = new TrackGPS(getActivity());
 		if (gps.canGetLocation()) {
 			Log.d("Your Location", "latitude:" + gps.getLatitude()
 					+ ", longitude: " + gps.getLongitude());
 		} 
 		else {
-			gps.showSettingsAlert();
+			gps.showGpsSettingsAlert();
 		}
+
+		placesListItems.clear();
+		lv = (ListView) getView().findViewById(R.id.list);
+		btnShowOnMap = (Button) getView().findViewById(R.id.btn_show_map);
+
 
 		// Calling background Async task to load Google Places
 		// After getting places from Google all the data is shown in listview
@@ -105,7 +96,7 @@ public class NearbyList extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+
 				// Getting values from selected ListItem
 				String reference = ((TextView) view
 						.findViewById(R.id.reference)).getText().toString();
@@ -125,6 +116,8 @@ public class NearbyList extends Fragment {
 	 * */
 	class LoadPlaces extends AsyncTask<String, String, String> {
 
+		
+		
 		/**
 		 * Before starting background thread show ProgressDialog
 		 * */
@@ -143,7 +136,8 @@ public class NearbyList extends Fragment {
 		 * Get all Places as JSON file
 		 * */
 		protected String doInBackground(String... args) {
-
+			
+			
 			googlePlaces = new GooglePlaces();
 
 			try {
@@ -169,15 +163,22 @@ public class NearbyList extends Fragment {
 			/**
 			 * Updating parsed places into listview
 			 * */
+			
+			String status = "NO CONNECTION";
 			// Get JSON response status
-			String status = nearPlaces.status;
+			try {
+				status = nearPlaces.status;
+			}
+			catch (NullPointerException e){
+				gps.showWifiSettingsAlert();
+			}
 
 			// Check for all possible status
 			if (status.equals("OK")) {
-				
+
 				// Successfully got places details
 				if (nearPlaces.results != null) {
-					
+
 					// loop through each place
 					for (Place p : nearPlaces.results) {
 						HashMap<String, String> map = new HashMap<String, String>();
@@ -193,8 +194,8 @@ public class NearbyList extends Fragment {
 					}
 					ListAdapter adapter = new SimpleAdapter(getActivity(),
 							placesListItems, R.layout.nearby_row, new String[] {
-									KEY_REFERENCE, KEY_NAME }, new int[] {
-									R.id.reference, R.id.name });
+						KEY_REFERENCE, KEY_NAME }, new int[] {
+						R.id.reference, R.id.name });
 
 					// Adding data into listview
 					lv.setAdapter(adapter);

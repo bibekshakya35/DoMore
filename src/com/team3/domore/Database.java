@@ -136,10 +136,34 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
+	/*
+	 * Delete all entries
+	 */
 	public void deleteAllEntries() {
 		this.db.delete(tableName, null, null);
 	}
-	
+
+	/*
+	 * Check the state of an entry
+	 */
+	public boolean checkState(Calendar cal) {
+		boolean state = false;
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minute = cal.get(Calendar.MINUTE);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int year = cal.get(Calendar.YEAR);
+		String sql = "SELECT FROM " + tableName + " WHERE hour = '" + hour
+				+ "' AND minute = '" + minute + "' AND month = '" + month
+				+ "' AND day = '" + day + "' AND year = '" + year + "'";
+		Log.w("", sql);
+		Cursor cursor = this.db.rawQuery(sql, null);
+		if (cursor != null && cursor.getCount() == 1) {
+			state = Boolean.parseBoolean(cursor.getString(5));
+		}
+		return state;
+	}
+
 	/*
 	 * Helper class
 	 */
@@ -170,7 +194,7 @@ public class Database {
 				}
 			}
 		}
-		
+
 		/*
 		 * Check if a database exists
 		 */

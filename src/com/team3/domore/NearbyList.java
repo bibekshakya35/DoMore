@@ -31,6 +31,7 @@ public class NearbyList extends Fragment {
 	TrackGPS gps;
 	GooglePlaces googlePlaces;
 	Button btnShowOnMap;
+	Button btnRefresh;
 	ProgressDialog pDialog;
 	PlacesList nearPlaces;
 	ListView lv;
@@ -54,7 +55,9 @@ public class NearbyList extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-
+		btnShowOnMap = (Button) getView().findViewById(R.id.btn_show_map);
+		btnRefresh = (Button) getView().findViewById(R.id.btn_refresh);
+		
 		// If it is possible to get location
 		gps = new TrackGPS(getActivity());
 		if (gps.canGetLocation()) {
@@ -64,17 +67,27 @@ public class NearbyList extends Fragment {
 		else {
 			gps.showGpsSettingsAlert();
 		}
+		
+		
+		
+		if(placesListItems.isEmpty()) {
+			lv = (ListView) getView().findViewById(R.id.list);
+			// Calling background Async task to load Google Places
+			// After getting places from Google all the data is shown in listview
+			new LoadPlaces().execute();
+		}
+		else {
+			lv = (ListView) getView().findViewById(R.id.list);
+			ListAdapter adapter = new SimpleAdapter(getActivity(),
+					placesListItems, R.layout.nearby_row, new String[] {
+				KEY_REFERENCE, KEY_NAME }, new int[] {
+				R.id.reference, R.id.name });
 
-		placesListItems.clear();
-		lv = (ListView) getView().findViewById(R.id.list);
-		btnShowOnMap = (Button) getView().findViewById(R.id.btn_show_map);
-
-
-		// Calling background Async task to load Google Places
-		// After getting places from Google all the data is shown in listview
-		new LoadPlaces().execute();
-
-		/** Button click event for shown on map */
+			// Adding data into listview
+			lv.setAdapter(adapter);
+		}
+		
+		// Button click event for shown on map
 		btnShowOnMap.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -86,7 +99,18 @@ public class NearbyList extends Fragment {
 				startActivity(i);
 			}
 		});
+		
+		// Button click event to refresh places list
+		btnRefresh.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View arg0) {
+				placesListItems.clear();
+				lv = (ListView) getView().findViewById(R.id.list);
+				new LoadPlaces().execute();
+			}
+		});
+		
 		/**
 		 * ListItem click event On selecting a listitem SinglePlace is
 		 * launched
@@ -192,6 +216,7 @@ public class NearbyList extends Fragment {
 						// add HashMap to ArrayList
 						placesListItems.add(map);
 					}
+					
 					ListAdapter adapter = new SimpleAdapter(getActivity(),
 							placesListItems, R.layout.nearby_row, new String[] {
 						KEY_REFERENCE, KEY_NAME }, new int[] {

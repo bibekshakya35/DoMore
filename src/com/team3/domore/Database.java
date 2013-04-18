@@ -136,6 +136,10 @@ public class Database {
 		this.db.execSQL(sql);
 	}
 
+	public void deleteAllEntries() {
+		this.db.delete(tableName, null, null);
+	}
+	
 	/*
 	 * Helper class
 	 */
@@ -166,7 +170,7 @@ public class Database {
 				}
 			}
 		}
-
+		
 		/*
 		 * Check if a database exists
 		 */

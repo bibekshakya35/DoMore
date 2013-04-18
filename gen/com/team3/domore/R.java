@@ -136,25 +136,26 @@ containing a value of this type.
     }
     public static final class id {
         public static final int add_button=0x7f040009;
-        public static final int address=0x7f040013;
+        public static final int address=0x7f040014;
         public static final int alarm_list=0x7f04000a;
-        public static final int btn_nav=0x7f040017;
-        public static final int btn_phone=0x7f040016;
+        public static final int btn_nav=0x7f040018;
+        public static final int btn_phone=0x7f040017;
+        public static final int btn_refresh=0x7f040010;
         public static final int btn_show_map=0x7f04000f;
         public static final int date=0x7f04000d;
         public static final int dateBtn=0x7f040006;
-        public static final int delete=0x7f040019;
+        public static final int delete=0x7f04001a;
         public static final int hybrid=0x7f040004;
-        public static final int list=0x7f040010;
-        public static final int location=0x7f040015;
+        public static final int list=0x7f040011;
+        public static final int location=0x7f040016;
         public static final int mapview=0x7f04000e;
-        public static final int menu_settings=0x7f040018;
-        public static final int name=0x7f040012;
+        public static final int menu_settings=0x7f040019;
+        public static final int name=0x7f040013;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int on_off=0x7f04000c;
-        public static final int phone=0x7f040014;
-        public static final int reference=0x7f040011;
+        public static final int phone=0x7f040015;
+        public static final int reference=0x7f040012;
         public static final int satellite=0x7f040002;
         public static final int save_button=0x7f040008;
         public static final int terrain=0x7f040003;
